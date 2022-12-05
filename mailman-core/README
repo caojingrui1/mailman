@@ -1,0 +1,23 @@
+mailman-core安装流程
+1.制作镜像
+cd mailman-core
+docker build -t mailman-core:v1.0.0 .
+
+2.配置全局变量：
+export HYPERKITTY_URL=http://mailman-web:8000/hyperkitty/               # 用于请求mailman-web进行归档的url, 这里为mailman-web服务的url
+export HYPERKITTY_API_KEY=api_key                                       # 用于请求mailman-web进行归档的api-key
+export MTA=exim                                                         # 设置对接mailman的mta为exim, 除此之外，还支持postfix
+export MM_HOSTNAME=0.0.0.0                                              # 提供给mailman-web的restful的ip地址
+export MAILMAN_REST_PORT=8001                                           # 提供给mailman-web的restful的端口，不设置代表8001
+export DATABASE_TYPE=mysql                                              # 设置对接mysql,除此之外还支持postgress
+export DATABASE_URL=mysql+pymysql://username:password@ip:3306/mailman   # 对接mysql的url信息
+export SMTP_HOST=172.17.0.6             # 对接smtp的ip
+export SMTP_PORT=465                    # 对接smtp的port
+export EMAIL_HOST_USER=username         # 对接smtp的用户名
+export EMAIL_HOST_PASSWORD=password     # 对接smtp的密码
+
+
+3.启动容器
+docker run --env-file env -dit --name mailman-core -p 8001:8001 -p 8024:8024 mailman-core:v1.0.0
+挂载路径：
+/opt/mailman ---> /opt/mailman

@@ -1,0 +1,108 @@
+# This is core test runner
+.only-default: &only-default
+  only:
+    - master
+    - merge_requests
+    - tags
+
+image: ghcr.io/maxking/mailman-ci-runner:latest
+
+variables:
+  POSTGRES_DB: "mailman_test"
+  POSTGRES_USER: "runner"
+  POSTGRES_PASSWORD: "runner"
+  MYSQL_ROOT_PASSWORD: "runner"
+  MYSQL_USER: "runner"
+  MYSQL_USER_PASSWORD: "runner"
+  MYSQL_DATABASE: "test_mailman"
+  LC_ALL: "C.UTF-8"
+  GIT_CEILING_DIRECTORIES: "/builds"
+  HOME: "/builds"
+
+
+qa:
+  <<: *only-default
+  script:
+  - tox -e qa
+
+docs:
+  <<: *only-default
+  script:
+  - tox -e docs
+
+sqlite-37:
+  <<: *only-default
+  script:
+  - tox -e py37-nocov
+
+sqlite-38:
+  <<: *only-default
+  script:
+  - tox -e py38-nocov
+
+sqlite-39:
+  <<: *only-default
+  script:
+    - tox -e py39-nocov
+
+pgsql-38:
+  <<: *only-default
+  services:
+  - postgres:latest
+  script:
+  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/postgres.cfg tox -e py38-nocov-pg
+  tags:
+  - postgres
+
+pgsql-37:
+  <<: *only-default
+  services:
+  - postgres:latest
+  script:
+  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/postgres.cfg tox -e py37-nocov-pg
+  tags:
+  - postgres
+
+pgsql-39:
+  <<: *only-default
+  services:
+  - postgres:latest
+  script:
+  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/postgres.cfg tox -e py39-nocov-pg
+  tags:
+  - postgres
+
+mysql-38:
+  <<: *only-default
+  services:
+  - mysql:5.6
+  script:
+  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/mysql.cfg tox -e py38-nocov-mysql
+  tags:
+  - mysql
+
+mysql-37:
+  <<: *only-default
+  services:
+  - mysql:5.6
+  script:
+  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/mysql.cfg tox -e py37-nocov-mysql
+  tags:
+  - mysql
+
+mysql-39:
+  <<: *only-default
+  services:
+  - mysql:5.6
+  script:
+  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/mysql.cfg tox -e py39-nocov-mysql
+  tags:
+  - mysql
+
+diffcov:
+  script:
+  - git config --global --add safe.directory /builds/mailman/mailman
+  - git config safe.directory
+  - tox -e py37-diffcov
+  only:
+  - merge_requests
