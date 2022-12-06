@@ -1,0 +1,25 @@
+image: maxking/mailman-ci-runner
+
+sqlite-py36:
+  script:
+    - tox -e py36-coverage
+
+sqlite-py37:
+  script:
+    - tox -e py37-coverage
+
+sqlite-py38:
+  script:
+    - tox -e py38-coverage
+
+sqlite-py39:
+  script:
+    - tox -e py39-coverage
+
+git-head:
+  script:
+    - tox -e py37-head
+  
+lint:
+  script:
+  - tox -e lint
