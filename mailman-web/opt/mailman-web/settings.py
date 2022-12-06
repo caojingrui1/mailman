@@ -50,7 +50,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "0.0.0.0",
     "127.0.0.1",
-    "1.14.102.183",
+    "mailman-web",
     os.environ.get('SERVE_FROM_DOMAIN'),
     os.environ.get('DJANGO_ALLOWED_HOSTS'),
     os.environ.get('MAILMAN_HOST_IP')
@@ -61,7 +61,7 @@ MAILMAN_REST_API_URL = os.environ.get('MAILMAN_REST_URL', 'http://mailman-core:8
 MAILMAN_REST_API_USER = os.environ.get('MAILMAN_REST_USER', 'restadmin')
 MAILMAN_REST_API_PASS = os.environ.get('MAILMAN_REST_PASSWORD', 'restpass')
 MAILMAN_ARCHIVER_KEY = os.environ.get('HYPERKITTY_API_KEY')
-MAILMAN_ARCHIVER_FROM = (os.environ.get('MAILMAN_HOST_IP', '172.19.199.2'),)
+MAILMAN_ARCHIVER_FROM = (os.environ.get('MAILMAN_HOST_IP'),)
 
 # Application definition
 
@@ -228,6 +228,7 @@ EMAIL_PORT = os.environ.get('SMTP_PORT', 25)
 EMAIL_HOST_USER = os.environ.get('SMTP_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('SMTP_HOST_PASSWORD')
 EMAIL_USE_TLS = os.environ.get('SMTP_USE_TLS', False)
+EMAIL_USE_SSL = os.environ.get('SMTP_USE_SSL', False)
 
 # Compatibility with Bootstrap 3
 from django.contrib.messages import constants as messages  # flake8: noqa
@@ -283,11 +284,10 @@ SOCIALACCOUNT_PROVIDERS = {
 # https://pypi.python.org/pypi/django_compressor
 #
 COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc {infile} {outfile}'),
-    ('text/x-scss', 'sass -t compressed {infile} {outfile}'),
-    ('text/x-sass', 'sass -t compressed {infile} {outfile}'),
+       ('text/less', 'lessc {infile} {outfile}'),
+       ('text/x-scss', 'sassc -t compressed {infile} {outfile}'),
+       ('text/x-sass', 'sassc -t compressed {infile} {outfile}'),
 )
-
 # On a production setup, setting COMPRESS_OFFLINE to True will bring a
 # significant performance improvement, as CSS files will not need to be
 # recompiled on each requests. It means running an additional "compress"
@@ -308,7 +308,7 @@ HAYSTACK_CONNECTIONS = {
         # Example configuration for Xapian:
         # 'ENGINE': 'xapian_backend.XapianEngine'
     },
-},
+}
 
 #
 # REST framework
@@ -397,6 +397,7 @@ FILTER_VHOST = True
 
 Q_CLUSTER = {
     'timeout': 300,
+    'retry': 300,
     'save_limit': 100,
     'orm': 'default',
 }
