@@ -8,7 +8,6 @@ RUN mv /opt/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 RUN mv /opt/opt/mailman-web /opt
 RUN mv /opt/opt/mailman-web-data /opt
-RUN mv /opt/opt/summary.html /opt
 
 # 2. install
 RUN yum update -y && yum install python3 -y && python3 -m ensurepip --default-pip && python3 -m pip install --upgrade pip

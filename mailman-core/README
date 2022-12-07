@@ -1,4 +1,9 @@
-mailman-core安装流程
+一、项目介绍
+mailman-core主要通过lmtp服务接收exim的邮件，并通过多进程、管道、责任链等技术栈对邮件进行检查、修改、归档等处理，处理完之后通过exim将邮件发送出去。并通过restful接口将数据库的相关数据暴露给mailman-web.其SBOM清单如下：
+mailman-core: mailman-core主体程序，其版本号是V3.3.7, 其上游：https://gitlab.com/mailman/mailman
+mailman-hyperkitty: mailman的归档程序，其版本是v1.2.0, 其上游：https://gitlab.com/mailman/mailman-hyperkitty
+
+二、mailman-core安装流程
 1.制作镜像
 cd mailman-core
 docker build -t mailman-core:v1.0.0 .
@@ -22,5 +27,7 @@ export EMAIL_HOST_PASSWORD=password     # 对接smtp的密码
 
 3.启动容器
 docker run --env-file env -dit --name mailman-core -p 8001:8001 -p 8024:8024 mailman-core:v1.0.0
+注意：env为配置文件，里面的内容为2中配置的全局变量
+
 挂载路径：
 /opt/mailman ---> /opt/mailman

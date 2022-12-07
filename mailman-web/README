@@ -1,4 +1,13 @@
-mailman-web安装流程
+一、项目介绍
+mailman-web文件主要是管理mailman-web源码及其构建，具体的SBOM清单：
+django-mailman3：v1.3.8, 其上游代码：https://gitlab.com/mailman/django-mailman3
+hyperkitty：v1.3.6, 其上游代码: https://gitlab.com/mailman/hyperkitty
+postorius: v1.3.7, 其上游代码：https://gitlab.com/mailman/postorius
+opt: 主要是mailman-web服务, 其上游代码：https://github.com/maxking/docker-mailman/tree/main/web/mailman-web
+Dockerfile: 自研构建代码，用于编译镜像。
+docker-entrypoint.sh: 自研构建代码，用于编译镜像。
+
+二、mailman-web安装流程
 1.制作镜像
 cd mailman-web
 docker build -t mailman-web:v1.0.0 .
@@ -23,6 +32,7 @@ export POSTORIUS_TEMPLATE_BASE_URL=http://127.0.0.1:8000                 # 模�
 
 3.启动容器
 docker run --env-file env -dit --name mailman-web -p 8000:8000 -p 8080:8080 mailman-web:v1.0.0
+注意：env为配置文件，里面的内容为2中的配置全局变量
 
 4.挂载路径：
 /opt/ ---> /opt/
