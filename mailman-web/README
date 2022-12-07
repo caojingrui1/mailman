@@ -3,7 +3,7 @@ mailman-web文件主要是管理mailman-web源码及其构建，具体的SBOM清
 django-mailman3：v1.3.8, 其上游代码：https://gitlab.com/mailman/django-mailman3
 hyperkitty：v1.3.6, 其上游代码: https://gitlab.com/mailman/hyperkitty
 postorius: v1.3.7, 其上游代码：https://gitlab.com/mailman/postorius
-opt: 主要是mailman-web服务, 其上游代码：https://github.com/maxking/docker-mailman/tree/main/web/mailman-web
+mailman-web: v0.4.4, 主要是mailman-web服务, 其上游代码：https://github.com/maxking/docker-mailman/tree/main/web/mailman-web
 Dockerfile: 自研构建代码，用于编译镜像。
 docker-entrypoint.sh: 自研构建代码，用于编译镜像。
 
@@ -16,7 +16,7 @@ docker build -t mailman-web:v1.0.0 .
 export SECRET_KEY=**********************                                 # django的密钥
 export MAILMAN_ADMIN_USER=zhuchao                                        # admin的用户名字，用于在django中创建超级用户
 export MAILMAN_ADMIN_EMAIL=tom_toworld@163.com                           # admin的邮箱，用于在django中创建超级用户
-export SERVE_FROM_DOMAIN=172.17.0.2                                      # 设置列表域名，比如lists.osinfra.cn
+export SERVE_FROM_DOMAIN=lists.osinfra.cn                                # 设置列表域名，比如lists.osinfra.cn
 export DATABASE_TYPE=mysql                                               # 对接数据库的类型, 例如: mysql/postgres
 export DATABASE_URL=mysql://admin:password@ip:3306/mailman               # 对接数据库的url信息
 export SMTP_HOST=172.17.0.6                                              # 对接smtp的ip, 用于创建用户，验证信息使用

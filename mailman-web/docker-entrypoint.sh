@@ -69,11 +69,13 @@ if [[ ! -e /opt/mailman-web-data/logs/mailmanweb.log ]]; then
 	echo "Creating log file for mailman web"
 	mkdir -p /opt/mailman-web-data/logs/
 	touch /opt/mailman-web-data/logs/mailmanweb.log
+	chown mailman:mailman /opt/mailman-web-data/logs/mailmanweb.log
 fi
 
 if [[ ! -e /opt/mailman-web-data/logs/uwsgi.log ]]; then
 	echo "Creating log file for uwsgi.."
 	touch /opt/mailman-web-data/logs/uwsgi.log
+	chown mailman:mailman /opt/mailman-web-data/logs/uwsgi.log
 fi
 
 # 2.collect static file and migrate to mysql and create superuser
