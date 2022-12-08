@@ -66,14 +66,33 @@ fi
 
 # Check if the logs directory is setup.
 if [[ ! -e /opt/mailman-web-data/logs/mailmanweb.log ]]; then
-	echo "Creating log file for mailman web"
-	mkdir -p /opt/mailman-web-data/logs/
+	echo "Creating log file for mailmanweb.log..."
 	touch /opt/mailman-web-data/logs/mailmanweb.log
+	chown mailman:mailman /opt/mailman-web-data/logs/mailmanweb.log
 fi
 
 if [[ ! -e /opt/mailman-web-data/logs/uwsgi.log ]]; then
-	echo "Creating log file for uwsgi.."
+	echo "Creating log file for uwsgi.log..."
 	touch /opt/mailman-web-data/logs/uwsgi.log
+	chown mailman:mailman /opt/mailman-web-data/logs/uwsgi.log
+fi
+
+if [[ ! -e /opt/mailman-web-data/logs/uwsgi-error.log ]]; then
+	echo "Creating log file for uwsgi-error.log..."
+	touch /opt/mailman-web-data/logs/uwsgi-error.log
+	chown mailman:mailman /opt/mailman-web-data/logs/uwsgi-error.log
+fi
+
+if [[ ! -e /opt/mailman-web-data/logs/uwsgi-qcluster.log ]]; then
+	echo "Creating log file for uwsgi-qcluster.log..."
+	touch /opt/mailman-web-data/logs/uwsgi-qcluster.log
+	chown mailman:mailman /opt/mailman-web-data/logs/uwsgi-qcluster.log
+fi
+
+if [[ ! -e /opt/mailman-web-data/logs/uwsgi-cron.log ]]; then
+	echo "Creating log file for uwsgi-cron.log..."
+	touch /opt/mailman-web-data/logs/uwsgi-cron.log
+	chown mailman:mailman /opt/mailman-web-data/logs/uwsgi-cron.log
 fi
 
 # 2.collect static file and migrate to mysql and create superuser

@@ -19,18 +19,17 @@
 
 from django.conf.urls import include
 from django.contrib import admin
-from django.views.generic import RedirectView
 from django.urls import path, reverse_lazy
+from django.views.generic import RedirectView
 
 urlpatterns = [
-    path(
-        '',
-        RedirectView.as_view(url=reverse_lazy('list_index'), permanent=True),
-    ),
-    path('mailman3/', include('postorius.urls')),
-    path('archives/', include('hyperkitty.urls')),
-    path('', include('django_mailman3.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('admin/', admin.site.urls),
-
+    path(r'^$', RedirectView.as_view(
+        url=reverse_lazy('list_index'),
+        permanent=True)),
+    path(r'postorius/', include('postorius.urls')),
+    path(r'hyperkitty/', include('hyperkitty.urls')),
+    path(r'', include('django_mailman3.urls')),
+    path(r'accounts/', include('allauth.urls')),
+    # Django admin
+    path(r'^admin/', admin.site.urls),
 ]

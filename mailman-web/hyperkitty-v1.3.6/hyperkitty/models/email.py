@@ -74,7 +74,7 @@ class Email(models.Model):
     thread_depth = models.IntegerField(default=0)
     thread_order = models.IntegerField(null=True, blank=True, db_index=True)
 
-    ADDRESS_REPLACE_RE = re.compile(r"([\w.+-]+)@([\w.+-]+)")
+    # ADDRESS_REPLACE_RE = re.compile(r"([\w.+-]+)@([\w.+-]+)")
 
     def __init__(self, *args, **kwargs):
         super(Email, self).__init__(*args, **kwargs)
@@ -183,10 +183,10 @@ class Email(models.Model):
             msg["In-Reply-To"] = "<%s>" % unfold(self.in_reply_to)
 
         # Body
-        content = self.ADDRESS_REPLACE_RE.sub(r"\1(a)\2", self.content)
+        # content = self.ADDRESS_REPLACE_RE.sub(r"\1(a)\2", self.content)
 
         # Enforce `multipart/mixed` even when there are no attachments.
-        msg.set_content(content, subtype='plain')
+        msg.set_content(self.content, subtype='plain')
         msg.make_mixed()
 
         # Attachments

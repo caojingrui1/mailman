@@ -1,40 +1,39 @@
-mailman-web安装流程
+一、项目介绍
+mailman-web文件主要是管理mailman-web源码及其构建，具体的SBOM清单：
+django-mailman3：v1.3.8, 其上游代码：https://gitlab.com/mailman/django-mailman3
+hyperkitty：v1.3.6, 其上游代码: https://gitlab.com/mailman/hyperkitty
+postorius: v1.3.7, 其上游代码：https://gitlab.com/mailman/postorius
+mailman-web: v0.4.4, 主要是mailman-web服务, 其上游代码：https://github.com/maxking/docker-mailman/tree/main/web/mailman-web
+Dockerfile: 自研构建代码，用于编译镜像。
+docker-entrypoint.sh: 自研构建代码，用于编译镜像。
+
+二、mailman-web安装流程
 1.制作镜像
 cd mailman-web
 docker build -t mailman-web:v1.0.0 .
 
 2.配置全局变量：
 export SECRET_KEY=**********************                                 # django的密钥
-export MAILMAN_ADMIN_USER=zhuchao                                        # admin的用户名字，用于在django中创建超级用户
-export MAILMAN_ADMIN_EMAIL=tom_toworld@163.com                           # admin的邮箱，用于在django中创建超级用户
-export SERVE_FROM_DOMAIN=172.17.0.2                                      # 设置列表域名，比如lists.osinfra.cn
-export DATABASE_TYPE=mysql                                               # 数据库类型, 例如: mysql/postgres
-export DATABASE_URL=mysql://admin:password@ip:3306/mailman               # 连接database的url信息
+export MAILMAN_ADMIN_USER=zhuchao                                        # admin的用户名字，用于在django中创建超级用户， 用于登录后台服务
+export MAILMAN_ADMIN_EMAIL=tom_toworld@163.com                           # admin的邮箱，用于在django中创建超级用户， 用于接收验证登录邮箱
+export SERVE_FROM_DOMAIN=lists.osinfra.cn                                # 设置列表域名，比如lists.osinfra.cn, 用于列表中title展示的域名
+export DATABASE_TYPE=mysql                                               # 对接数据库的类型, 例如: mysql/postgres
+export DATABASE_URL=mysql://admin:password@ip:3306/mailman               # 对接数据库的url信息
 export SMTP_HOST=172.17.0.6                                              # 对接smtp的ip, 用于创建用户，验证信息使用
 export SMTP_PORT=25                                                      # 对接smtp的port, 如果端口需要加密，请设置：SMTP_USE_TLS=True
 export EMAIL_HOST_USER=username                                          # 对接smtp的用户名
 export EMAIL_HOST_PASSWORD=password                                      # 对接smtp的密码
-export MAILMAN_REST_URL=http://172.17.0.2:8001                           # mailman-core服务的url， 参考mailman-core服务的配置
-export MAILMAN_REST_USER=restadmin                                       # mailman-core服务的用户名， 参考mailman-core服务的配置
-export MAILMAN_REST_PASSWORD=restpass                                    # mailman-core服务的密码， 参考mailman-core服务的配置
+export MAILMAN_REST_URL=http://172.17.0.2:8001                           # 请求mailman-core服务的url， 参考mailman-core服务的配置
+export MAILMAN_REST_USER=restadmin                                       # 请求mailman-core服务的用户名， 参考mailman-core服务的配置
+export MAILMAN_REST_PASSWORD=restpass                                    # 请求mailman-core服务的密码， 参考mailman-core服务的配置
 export HYPERKITTY_API_KEY=api_key                                        # mailman-core服务请求携带api-key， 参考mailman-core服务的配置
-export MAILMAN_HOST_IP=172.17.0.2                                        # mailman-core服务请求的来源ip
+export MAILMAN_HOST_IP=172.17.0.2                                        # mailman-core服务请求的来源ip(容器ip)
+export DJANGO_ALLOWED_HOSTS=ip                                           # mailman-core请求服务的host的来源ip
 export POSTORIUS_TEMPLATE_BASE_URL=http://127.0.0.1:8000                 # 模板的url, mailman-web服务
 
 3.启动容器
-docker run -dit --name mailman-web -p 8000:8000 -p 8080:8080 mailman-web:v1.0.0
+docker run --env-file env -dit --name mailman-web -p 8000:8000 -p 8080:8080 mailman-web:v1.0.0
+注意：env为配置文件，里面的内容为2中的配置全局变量
 
-4.相关问题解决：
-    1.修改hyperkitty的init文件
-    /usr/local/lib/python3.9/site-packages/hyperkitty/__init__.py
-    import sys
-    if sys.version > '3':
-        try:
-            # noinspection PyUnresolvedReferences
-            import pymysql
-            # noinspection PyUnresolvedReferences
-            from pymysql import install_as_MySQLdb
-            pymysql.version_info = (1, 4, 13, "final", 0)
-            install_as_MySQLdb()
-        except ImportError as e:
-            logging.error('Import pymysql failed, please check this package, if not required please ignore it.')
+4.挂载路径：
+/opt/ ---> /opt/

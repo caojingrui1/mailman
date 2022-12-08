@@ -16,10 +16,6 @@
 
 + mailman-exim: 主要是负责邮件的传递，负责与邮件打交道。
 
-  ~~~bash
-  mailman-exim: 在openEuler上构建exim-4.96版本。
-  ~~~
-
   
 
 

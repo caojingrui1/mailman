@@ -1,4 +1,8 @@
-在openEuler上构建exim已经成功OK, 详细可以参考: app-mailman项目
-可以参考：
-https://github.com/opensourceways/app-mailman
-https://gitee.com/src-openeuler/exim
+一、项目介绍
+mailman-exim主要使用exim作为MTA发送邮件，具体的SBOM清单：
+1.mailman-exim主要是采用在openEuler上构建的exim4.96, 具体参考：https://gitee.com/src-openeuler/exim
+2.Dockerfile: 自研构建代码，用于编译镜像。
+3.email-addresses: 用于制作镜像需要拷贝的文件
+
+
+
