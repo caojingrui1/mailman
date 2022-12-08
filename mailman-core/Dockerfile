@@ -19,7 +19,7 @@ RUN rm -rf /opt/mailman/package
 WORKDIR /opt/mailman
 RUN useradd mailman -s /sbin/nologin -M
 RUN chown -R mailman /opt/mailman
-RUN ln -s /usr/local/bin/runner /usr/bin/runner
+RUN ln -s /usr/local/bin/runner /usr/bin/runner  && ln -s /usr/local/bin/mailman /usr/bin/
 EXPOSE 8001 8024
 ENV MAILMAN_CONFIG_FILE /etc/mailman.cfg
 

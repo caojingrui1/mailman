@@ -31,3 +31,20 @@ docker run --env-file env -dit --name mailman-core -p 8001:8001 -p 8024:8024 mai
 
 挂载路径：
 /opt/mailman ---> /opt/mailman
+
+4.导入模板
+在安装部署完成mailman-core和mailman-web服务后，需要导入邮件列表的模板，优先导入具体的邮件列表，如果没有，则导入域的模板：
+导入方法：
+向数据库的表template增加以下字段，可将模板信息放入到gitee或者github, 并将url替换下例的uri; context设置域名，当前域名信息是：tomtoworld.xyz.
++----+-----------------------------+----------------+-----------------------------------------------------------------------------------------------------+----------+----------+
+| id | name                        | context        | uri                                                                                                 | username | password |
++----+-----------------------------+----------------+-----------------------------------------------------------------------------------------------------+----------+----------+
+|  5 | list:member:regular:header  | tomtoworld.xyz | http://mailman-web:8000/postorius/api/templates/list/tom.tomtoworld.xyz/list:member:regular:header  | NULL     |          |
+|  6 | list:member:regular:footer  | tomtoworld.xyz | http://mailman-web:8000/postorius/api/templates/list/tom.tomtoworld.xyz/list:member:regular:footer  | NULL     |          |
+|  8 | list:user:notice:hold       | tomtoworld.xyz | http://mailman-web:8000/postorius/api/templates/list/tom.tomtoworld.xyz/list:user:notice:hold       | NULL     |          |
+|  9 | list:user:notice:goodbye    | tomtoworld.xyz | http://mailman-web:8000/postorius/api/templates/list/tom.tomtoworld.xyz/list:user:notice:goodbye    | NULL     |          |
+| 10 | list:user:action:subscribe  | tomtoworld.xyz | http://mailman-web:8000/postorius/api/templates/list/tom.tomtoworld.xyz/list:user:action:subscribe  | NULL     |          |
+| 11 | list:admin:notice:subscribe | tomtoworld.xyz | http://mailman-web:8000/postorius/api/templates/list/tom.tomtoworld.xyz/list:admin:notice:subscribe | NULL     |          |
+| 12 | list:admin:action:post      | tomtoworld.xyz | http://mailman-web:8000/postorius/api/templates/list/tom.tomtoworld.xyz/list:admin:action:post      | NULL     |          |
+| 13 | list:user:notice:welcome    | tomtoworld.xyz | http://mailman-web:8000/postorius/api/templates/list/tom.tomtoworld.xyz/list:user:notice:welcome    | NULL     |          |
++----+-----------------------------+----------------+-----------------------------------------------------------------------------------------------------+----------+----------+
