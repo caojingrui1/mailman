@@ -52,6 +52,7 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
     "127.0.0.1",
     "mailman-web",
+    "mailman-web-service.mail.svc.cluster.local",
     os.environ.get('SERVE_FROM_DOMAIN'),
     os.environ.get('DJANGO_ALLOWED_HOSTS'),
     os.environ.get('MAILMAN_HOST_IP')
