@@ -26,6 +26,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import ipaddress
 import os
 import sys
 import dj_database_url
@@ -55,6 +56,11 @@ ALLOWED_HOSTS = [
     os.environ.get('DJANGO_ALLOWED_HOSTS'),
     os.environ.get('MAILMAN_HOST_IP')
 ]
+
+INNER_NETWORK_IP = os.environ.get('DJANGO_ALLOWED_HOSTS').split(".")[:2]
+INNER_NETWORK_CIDR = "{0}.{1}.0.0/16".format(INNER_NETWORK_IP[0], INNER_NETWORK_IP[1])
+INNER_NETWORK_CIDR_LIST = [str(ip) for ip in ipaddress.IPv4Network(INNER_NETWORK_CIDR)]
+ALLOWED_HOSTS.extend(INNER_NETWORK_CIDR_LIST)
 
 # Mailman API credentials
 MAILMAN_REST_API_URL = os.environ.get('MAILMAN_REST_URL', 'http://mailman-core:8001')
