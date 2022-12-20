@@ -34,9 +34,10 @@ docker run --env-file env -dit --name mailman-core -p 8001:8001 -p 8024:8024 mai
 
 4.导入模板
 在安装部署完成mailman-core和mailman-web服务后，需要导入邮件列表的模板，优先导入具体的邮件列表，如果没有，则导入域的模板：
-导入方法：
+<1>手动导入方法：
 1.在mailman/template下创建文件夹，文件名为邮件列表的域名，并模仿lists.osinfra.cn，在域名文件夹下创建对应的模板文件。
 2.根据name或者context字段向数据库的表template增加以下记录，context字段：当前域名信息是：lists.osinfra.cn; uri:获取uri信息.
+表格数据：
 +----+-----------------------------+--------------------------+----------------------------------------------------------------------------------------------------------------------------------------+----------+----------+
 | id | name                        | context                  | uri                                                                                                                                    | username | password |
 +----+-----------------------------+--------------------------+----------------------------------------------------------------------------------------------------------------------------------------+----------+----------+
@@ -49,8 +50,6 @@ docker run --env-file env -dit --name mailman-core -p 8001:8001 -p 8024:8024 mai
 | 43 | list:user:notice:hold       | lists.osinfra.cn         | https://github.com/opensourceways/mailman/raw/main/templates/lists.osinfra.cn/list-user-notice-hold.txt                                | NULL     | NULL     |
 | 44 | list:user:notice:welcome    | lists.osinfra.cn         | https://github.com/opensourceways/mailman/raw/main/templates/lists.osinfra.cn/list-user-notice-welcome.txt                             | NULL     | NULL     |
 +----+-----------------------------+--------------------------+----------------------------------------------------------------------------------------------------------------------------------------+----------+----------+
-
-
 插入语句：
 insert into template(name, context, uri, username) values("list:admin:action:post", "lists.osinfra.cn", "https://github.com/opensourceways/mailman/raw/main/templates/lists.osinfra.cn/list-admin-action-post.txt", NULL);
 insert into template(name, context, uri, username) values("list:admin:notice:subscribe", "lists.osinfra.cn", "https://github.com/opensourceways/mailman/raw/main/templates/lists.osinfra.cn/list-admin-notice-subscribe.txt", NULL);
@@ -61,3 +60,6 @@ insert into template(name, context, uri, username) values("list:user:notice:good
 insert into template(name, context, uri, username) values("list:user:notice:hold", "lists.osinfra.cn", "https://github.com/opensourceways/mailman/raw/main/templates/lists.osinfra.cn/list-user-notice-hold.txt", NULL);
 insert into template(name, context, uri, username) values("list:user:notice:welcome", "lists.osinfra.cn", "https://github.com/opensourceways/mailman/raw/main/templates/lists.osinfra.cn/list-user-notice-welcome.txt", NULL);
 
+<2>自动导入方法：
+进入mailman/template里面
+python3 refresh_to_mysql.py --domain lists.osinfra.cn --username root --password **** --ip 192.168.1.1 --port=3306
