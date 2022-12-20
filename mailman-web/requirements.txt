@@ -1,0 +1,7 @@
+django_gravatar==0.1.0
+django-gravatar2==1.4.4
+dj_database_url==1.0.0
+whoosh==2.7.4
+uwsgi==2.0.21
+pymysql==1.0.2
+django==3.2.16
