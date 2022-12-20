@@ -1,0 +1,9 @@
+邮件列表已经批准退订你的邮箱：
+    成员：$member
+    列表：$listname
+
+
+
+The mailing list has been approved to unsubscribe your email:
+    member: $member
+    listname: $listname
