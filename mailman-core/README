@@ -62,4 +62,5 @@ insert into template(name, context, uri, username) values("list:user:notice:welc
 
 <2>自动导入方法：
 进入mailman/template里面
-python3 refresh_to_mysql.py --domain lists.osinfra.cn --username root --password **** --ip 192.168.1.1 --port=3306
+python3 refresh_to_mysql.py domain username password ip port
+python3 refresh_to_mysql.py lists.osinfra.cn mailman '****' 192.168.1.3 3306
