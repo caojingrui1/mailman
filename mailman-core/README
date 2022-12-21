@@ -60,7 +60,10 @@ insert into template(name, context, uri, username) values("list:user:notice:good
 insert into template(name, context, uri, username) values("list:user:notice:hold", "lists.osinfra.cn", "https://github.com/opensourceways/mailman/raw/main/templates/lists.osinfra.cn/list-user-notice-hold.txt", NULL);
 insert into template(name, context, uri, username) values("list:user:notice:welcome", "lists.osinfra.cn", "https://github.com/opensourceways/mailman/raw/main/templates/lists.osinfra.cn/list-user-notice-welcome.txt", NULL);
 
-<2>自动导入方法：
+<2>使用脚本自动导入方法：
 进入mailman/template里面
 python3 refresh_to_mysql.py domain username password ip port
 python3 refresh_to_mysql.py lists.osinfra.cn mailman '****' 192.168.1.3 3306
+
+<3>可以在域名模板上设置，路径是：https://mailweb.osinfra.cn/postorius/domains/lists.osinfra.cn/templates/new
+按照templates文件下的对应域名的文件夹进行修改。
