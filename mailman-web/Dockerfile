@@ -6,7 +6,6 @@ MAINTAINER TomNewChao<tom_toworld@163.com>
 COPY . /opt
 RUN mv /opt/docker-entrypoint.sh /usr/local/bin/
 RUN mv /opt/mailman-web-v0.4.4/mailman-web /opt
-RUN mv /opt/mailman-web-v0.4.4/mailman-web-data /opt
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # 2. install
@@ -25,8 +24,9 @@ RUN rm -rf /opt/django-mailman3-v1.3.8 && rm -rf /opt/hyperkitty-v1.3.6 && rm -r
 # 4. setting
 WORKDIR /opt/mailman-web
 RUN useradd mailman -s /sbin/nologin -M
-RUN mkdir -p /opt/mailman-web-data/logs/
-RUN chown -R mailman /opt/ && chmod u+x /opt/mailman-web/manage.py && chmod u+x /opt/mailman-web/uwsgi.ini
+RUN mkdir -p /opt/mailman-web-data && mkdir -p /opt/mailman-web-data/logs
+RUN mkdir -p /opt/mailman-web-static && mkdir -p /opt/mailman-web-static/static
+RUN chown -R mailman:mailman /opt/ && chmod u+x /opt/mailman-web/manage.py && chmod u+x /opt/mailman-web/uwsgi.ini
 EXPOSE 8000 8080
 STOPSIGNAL SIGINT
 

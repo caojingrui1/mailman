@@ -202,7 +202,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_ROOT = '/opt/mailman-web-data/static'
+STATIC_ROOT = '/opt/mailman-web-static/static'
 
 STATIC_URL = '/static/'
 
