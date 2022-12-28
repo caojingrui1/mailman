@@ -98,6 +98,7 @@ fi
 # 2.collect static file and migrate to mysql and create superuser
 # Collect static for the django installation.
 python3 manage.py collectstatic --noinput
+chown -R mailman:mailman /opt/mailman-web-static
 
 # Migrate all the data to the database if this is a new installation, otherwise
 # this command will upgrade the database.
