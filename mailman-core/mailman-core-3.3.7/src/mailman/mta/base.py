@@ -73,7 +73,7 @@ class BaseDelivery:
             from_msg_list = re.findall(r'<(.*?)>', msg["From"])
             if len(from_msg_list) == 1:
                 msg_list = from_msg_list[0].split("@")
-                if msg_list[-1] == "qq.com":
+                if msg_list[-1] in ["qq.com", "huawei.com", "h-partners.com"]:
                     new_msg = copy.deepcopy(msg)
                     for key, value in msg.items():
                         if key == "From":
