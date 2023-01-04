@@ -74,12 +74,11 @@ class BaseDelivery:
             if len(from_msg_list) == 1:
                 msg_list = from_msg_list[0].split("@")
                 if msg_list[-1] in ["qq.com", "huawei.com", "h-partners.com"]:
-                    new_msg = copy.deepcopy(msg)
-                    for key, value in msg.items():
-                        if key == "From":
-                            del new_msg["From"]
-                            break
-                    msg = new_msg
+                    list_id_list = re.findall(r'<(.*?)>', msg["List-Id"])
+                    if len(list_id_list) == 1:
+                        list_domain = list_id_list[0].replace(".", "@", 1)
+                        del msg["From"]
+                        msg["From"] = list_domain
             refused = self._connection.sendmail(
                 sender, sorted(recipients), msg)
         except smtplib.SMTPRecipientsRefused as error:
