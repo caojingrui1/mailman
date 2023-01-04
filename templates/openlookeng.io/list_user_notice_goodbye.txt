@@ -1,0 +1,5 @@
+邮件列表($listname)已经批准退订你的邮箱!
+
+
+
+The mailing list ($listname) has been approved to unsubscribe your email!
