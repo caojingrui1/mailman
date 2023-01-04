@@ -18,7 +18,8 @@
 #
 
 import re
-
+import os
+from django.utils.safestring import mark_safe
 from django import forms
 from django.apps import apps
 from django.core.exceptions import ValidationError
@@ -185,6 +186,11 @@ class ListAnonymousSubscribe(forms.Form):
 
     display_name = forms.CharField(
         label=_('Your name (optional)'), required=False)
+
+    privacy_check = forms.BooleanField(initial=False, required=True, label=_(mark_safe(
+        'I have read and agree to the community <a href="%s">Privacy Statement</a> and '
+        '<a href="%s">Community Conduct</a>.' % (os.getenv("PRIVACY_LINK", "https://www.openeuler.org/en/other/privacy/"), os.getenv("CONDUCT_LINK", "https://www.openeuler.org/en/community/conduct/"))
+    )), widget=forms.CheckboxInput())
 
 
 class ListSettingsForm(forms.Form):
