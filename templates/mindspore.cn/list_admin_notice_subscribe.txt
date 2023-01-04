@@ -12,7 +12,7 @@
 若您不想注册该邮箱，请忽略此消息。若您怀疑自己被恶意订阅了该列表或有其他任何
 疑问，请联系：
 
-    contact@openeuler.io
+    $owner_email
 
 
 
@@ -34,4 +34,4 @@ If you do not wish to register this email address, simply disregard this
 message. If you think you are being maliciously subscribed to the list, or
 have any other questions, you may contact
 
-    contact@openeuler.io
+    $owner_email
