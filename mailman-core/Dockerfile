@@ -6,6 +6,8 @@ MAINTAINER TomNewChao<tom_toworld@163.com>
 RUN mkdir -p "/opt/mailman/package"
 COPY . /opt/mailman/package/
 RUN cp /opt/mailman/package/docker-entrypoint.sh /usr/local/bin/ && chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN mv /opt/mailman/package/email/base64mime.py /usr/lib64/python3.9/email/ -f && chmod +644 /usr/lib64/python3.9/email/base64mime.py
+RUN mv /opt/mailman/package/email/quoprimime.py /usr/lib64/python3.9/email/ -f && chmod +644 /usr/lib64/python3.9/email/quoprimime.py
 
 # 2.install
 RUN yum update -y && yum install python3 -y && python3 -m ensurepip --default-pip && python3 -m pip install --upgrade pip
