@@ -13,6 +13,8 @@ RUN yum install postgresql-odbc-devel -y && yum install mysql -y && pip3 install
 RUN pip3 uninstall flufl.bounce flufl.i18n flufl.lock -y && pip3 install flufl.bounce flufl.i18n flufl.lock
 RUN cd /opt/mailman/package/mailman-core-3.3.7 && python3 setup.py install
 RUN cd /opt/mailman/package/mailman-hyperkitty-1.2.0 && python3 setup.py install
+RUN mv /opt/mailman/package/email/base64mime.py /usr/lib64/python3.9/email/ -f && chmod +644 /usr/lib64/python3.9/email/base64mime.py
+RUN mv /opt/mailman/package/email/quoprimime.py /usr/lib64/python3.9/email/ -f && chmod +644 /usr/lib64/python3.9/email/quoprimime.py
 RUN rm -rf /opt/mailman/package
 
 # 3.setting
