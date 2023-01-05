@@ -30,6 +30,9 @@ export HYPERKITTY_API_KEY=api_key                                        # mailm
 export MAILMAN_HOST_IP=172.17.0.2                                        # mailman-core服务请求的来源ip(容器ip)
 export DJANGO_ALLOWED_HOSTS=ip                                           # mailman-core请求服务的host的来源ip
 export POSTORIUS_TEMPLATE_BASE_URL=http://mailman-web-service.mail.svc.cluster.local:80    # 模板的url, mailman-web服务
+export PRIVACY_LINK=https://www.openeuler.org/en/other/privacy/                            # 订阅邮件列表的隐私声明
+export CONDUCT_LINK=https://www.openeuler.org/en/community/conduct/                        # 订阅邮件列表的行为守则
+
 
 3.启动容器
 docker run --env-file env -dit --name mailman-web -p 8000:8000 -p 8080:8080 mailman-web:v1.0.0
