@@ -16,6 +16,7 @@ RUN cd /opt/mailman/package/mailman-hyperkitty-1.2.0 && python3 setup.py install
 RUN mv /opt/mailman/package/email/base64mime.py /usr/lib64/python3.9/email/ -f && chmod +644 /usr/lib64/python3.9/email/base64mime.py
 RUN mv /opt/mailman/package/email/quoprimime.py /usr/lib64/python3.9/email/ -f && chmod +644 /usr/lib64/python3.9/email/quoprimime.py
 RUN rm -rf /opt/mailman/package
+RUN yum remove postgresql-server-devel && yum install postgresql postgresql-devel python3-devel gcc -y && pip3 install psycopg2
 
 # 3.setting
 WORKDIR /opt/mailman
