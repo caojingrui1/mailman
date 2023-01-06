@@ -9,14 +9,13 @@ RUN cp /opt/mailman/package/docker-entrypoint.sh /usr/local/bin/ && chmod +x /us
 
 # 2.install
 RUN yum update -y && yum install python3 -y && python3 -m ensurepip --default-pip && python3 -m pip install --upgrade pip
-RUN yum install postgresql-odbc-devel -y && yum install mysql -y && pip3 install pymysql==1.0.2
+RUN yum install postgresql-odbc-devel -y && yum install mysql -y && pip3 install pymysql==1.0.2 && pip3 install psycopg2-binary==2.9.5
 RUN pip3 uninstall flufl.bounce flufl.i18n flufl.lock -y && pip3 install flufl.bounce flufl.i18n flufl.lock
 RUN cd /opt/mailman/package/mailman-core-3.3.7 && python3 setup.py install
 RUN cd /opt/mailman/package/mailman-hyperkitty-1.2.0 && python3 setup.py install
 RUN mv /opt/mailman/package/email/base64mime.py /usr/lib64/python3.9/email/ -f && chmod +644 /usr/lib64/python3.9/email/base64mime.py
 RUN mv /opt/mailman/package/email/quoprimime.py /usr/lib64/python3.9/email/ -f && chmod +644 /usr/lib64/python3.9/email/quoprimime.py
 RUN rm -rf /opt/mailman/package
-RUN yum remove postgresql-server-devel && yum install postgresql postgresql-devel python3-devel gcc -y && pip3 install psycopg2
 
 # 3.setting
 WORKDIR /opt/mailman

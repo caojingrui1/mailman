@@ -20,7 +20,6 @@ RUN pip3 install -r /opt/requirements.txt
 # 3.clean
 RUN rm -rf /opt/docker-entrypoint.sh && rm -rf /opt/Dockerfile && rm -rf /opt/README && rm -rf /opt/requirements.txt
 RUN rm -rf /opt/django-mailman3-v1.3.8 && rm -rf /opt/hyperkitty-v1.3.6 && rm -rf /opt/postorius-1.3.7 && rm -rf /opt/mailman-web-v0.4.4 && rm -rf /opt/django-allauth-0.51.0
-RUN yum remove postgresql-server-devel && yum install postgresql postgresql-devel python3-devel gcc -y && pip3 install psycopg2
 
 # 4. setting
 WORKDIR /opt/mailman-web
