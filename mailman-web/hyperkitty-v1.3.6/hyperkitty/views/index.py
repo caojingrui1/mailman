@@ -33,7 +33,9 @@ from django_mailman3.lib.paginator import paginate
 from django_mailman3.models import MailDomain
 
 from hyperkitty.models import ArchivePolicy, MailingList
+from logging import getLogger
 
+logger = getLogger(__name__)
 
 class SortMode:
     """All the Sort modes the Index page supports."""
@@ -77,7 +79,8 @@ def index(request):
             domain = '@%s' % domain
             our_lists = our_lists | mlists.filter(name__iendswith=domain)
         mlists = our_lists
-
+    logger.error("1.**********************************")
+    logger.error(len(mlists))
     # Name filtering
     name_filter = request.GET.get('name')
     if name_filter:
@@ -105,7 +108,8 @@ def index(request):
         # Unauthenticated users only see public lists
         mlists = mlists.filter(
             archive_policy=ArchivePolicy.public.value)
-
+    logger.error("2.**********************************")
+    logger.error(len(mlists))
     # Sorting
     if sort_mode == SortMode.NAME:
         mlists = mlists.order_by(SortMode.NAME)
@@ -117,19 +121,26 @@ def index(request):
         mlists.sort(key=lambda l: l.recent_participants_count, reverse=True)
     elif sort_mode == SortMode.CREATION:
         mlists = mlists.order_by("-created_at")
-
+    logger.error("3.**********************************")
+    logger.error(len(mlists))
     # Inactive List Setting
     show_inactive = getattr(settings, 'SHOW_INACTIVE_LISTS_DEFAULT', False)
+    logger.error("4.**********************************")
+    for ind, i in enumerate(mlists):
+        logger.error("index:{} i.recent_threads_count:{}".format(ind, i.recent_threads_count))
+        logger.error("index:{} i.recent_participants_count:{}".format(ind, i.recent_participants_count))
 
     mlists = paginate(mlists, request.GET.get('page'),
                       request.GET.get('count'))
-
     context = {
         'view_name': 'all_lists',
         'all_lists': mlists,
         'sort_mode': sort_mode,
         'show_inactive': show_inactive
     }
+    logger.error("5.**********************************")
+    logger.error(context)
+    logger.error(context["all_lists"].__dict__)
     return render(request, "hyperkitty/index.html", context)
 
 
