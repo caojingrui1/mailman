@@ -193,6 +193,18 @@ class ListAnonymousSubscribe(forms.Form):
     )), widget=forms.CheckboxInput())
 
 
+class ListAnonymousUnsubscribe(forms.Form):
+    """Form fields to join an existing list as an anonymous user.
+    """
+
+    email = forms.CharField(
+        label=_('Your email address'),
+        validators=[validate_email],
+        error_messages={
+            'required': _('Please enter an email address.'),
+            'invalid': _('Please enter a valid email address.')})
+
+
 class ListSettingsForm(forms.Form):
     """
     Base class for list settings forms.

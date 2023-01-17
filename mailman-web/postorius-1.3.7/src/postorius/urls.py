@@ -42,6 +42,13 @@ list_patterns = [
     re_path(r'^anonymous_subscribe$',
             list_views.ListAnonymousSubscribeView.as_view(),
             name='list_anonymous_subscribe'),
+    # send email
+    re_path(r'^anonymous_unsubscribe_email$',
+            list_views.AnonymousUnsubscribeEmailView.as_view(),
+            name='anonymous_unsubscribe_email'),
+    re_path(r'^anonymous_unsubscribe$',
+            list_views.AnonymousUnsubscribeView.as_view(),
+            name='anonymous_unsubscribe'),
     re_path(r'^change_subscription$',
             list_views.ChangeSubscriptionView.as_view(),
             name='change_subscription'),
