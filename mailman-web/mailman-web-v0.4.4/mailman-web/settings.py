@@ -226,6 +226,7 @@ LOGOUT_URL = 'account_logout'
 
 # Use SERVE_FROM_DOMAIN as the default domain in the email.
 hostname = os.environ.get('SERVE_FROM_DOMAIN', 'localhost.local')
+SERVE_WEB_DOMAIN = os.environ.get('SERVE_WEB_DOMAIN', "mailweb.osinfra.cn")
 DEFAULT_FROM_EMAIL = 'postorius@{}'.format(hostname)
 SERVER_EMAIL = 'root@{}'.format(hostname)
 #  SERVER_EMAIL = "root@mailweb.tomtoworld.xyz"

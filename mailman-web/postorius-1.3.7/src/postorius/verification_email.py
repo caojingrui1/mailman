@@ -62,7 +62,8 @@ class UnsubscribeEmailLib(object):
     @classmethod
     def send_email(cls, email, list_id):
         """send the unsubscribe email to user"""
-        domain = settings.DEFAULT_FROM_EMAIL.split("@")[-1].strip()
+        email_domain = settings.DEFAULT_FROM_EMAIL.split("@")[-1].strip()
+        web_domain = settings.SERVE_WEB_DOMAIN
         # https://mailweb.osinfra.cn/postorius/lists/tom.lists.osinfra.cn/anonymous_subscribe
         save_dict = {
             "email": email,
@@ -71,12 +72,12 @@ class UnsubscribeEmailLib(object):
         str_data = json.dumps(save_dict)
         encrypt_text = cls.aescrypt.encrypt(str_data)
         url_data = str(encrypt_text, encoding="utf-8")
-        link = cls.unsubscribe_url.format(domain, list_id, url_data)
+        link = cls.unsubscribe_url.format(web_domain, list_id, url_data)
         template = Template.format(
-            domain=domain,
+            domain=email_domain,
             link=link
         )
-        cls.send_message(domain, template, email)
+        cls.send_message(email_domain, template, email)
 
     @classmethod
     def parse_text(cls, encrypt_text):
