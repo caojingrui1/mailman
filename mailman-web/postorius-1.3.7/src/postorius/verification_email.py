@@ -14,9 +14,9 @@ from pyDes import des, CBC, PAD_PKCS5
 logger = logging.getLogger(__name__)
 
 Template = '''
-<div style="margin:10px 20px;font-size:16px;">
+<div style="margin:10px 20px;font-size:12px;">
     <div>Hello from {domain}!</div>
-    <div>You're receiving this e-mail because you or someone else has requested a unsubscribe email list for your user account.</div>
+    <div>You're receiving this e-mail because you or someone else has requested a unsubscribe email list,You can confirm by clicking the link below.</div>
     <br>
     <div>Your verification Link is: <a href="{link}">{link}</div>
     <br>
