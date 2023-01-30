@@ -21,6 +21,8 @@ import csv
 import email.utils
 import logging
 import sys
+import traceback
+import urllib
 from urllib.error import HTTPError
 
 from django.conf import settings
@@ -55,7 +57,7 @@ from postorius.forms import (
     ListHeaderMatchFormset, ListIdentityForm, ListMassRemoval,
     ListMassSubscription, ListNew, ListSubscribe, MemberForm, MemberModeration,
     MemberPolicyForm, MessageAcceptanceForm, MultipleChoiceForm,
-    UserPreferences)
+    UserPreferences, ListAnonymousUnsubscribe)
 from postorius.forms.fields import (
     DELIVERY_MODE_CHOICES, DELIVERY_STATUS_CHOICES)
 from postorius.forms.list_forms import ACTION_CHOICES, TokenConfirmForm
@@ -63,7 +65,7 @@ from postorius.models import (
     Domain, List, Mailman404Error, Style, SubscriptionMode)
 from postorius.utils import get_member_or_nonmember, set_preferred
 from postorius.views.generic import MailingListView, bans_view
-
+from postorius.verification_email import UnsubscribeEmailLib
 
 logger = logging.getLogger(__name__)
 
@@ -334,6 +336,7 @@ class ListSummaryView(MailingListView):
         else:
             user_emails = None
             data['anonymous_subscription_form'] = ListAnonymousSubscribe()
+            data['anonymous_unsubscription_form'] = ListAnonymousUnsubscribe()
         return render(request, 'postorius/lists/summary.html', data)
 
 
@@ -545,6 +548,67 @@ class ListAnonymousSubscribeView(MailingListView):
                                _('Something went wrong. Please try again.'))
         except HTTPError as e:
             messages.error(request, e.msg)
+        return redirect('list_summary', self.mailing_list.list_id)
+
+
+class AnonymousUnsubscribeEmailView(MailingListView):
+    def post(self, request, *args, **kwargs):
+        email = request.POST['email']
+        # Verify the user actually controls this email, should
+        # return 1 if the user owns the email, 0 otherwise.
+        try:
+            client = get_mailman_client()
+            client.get_user(email)
+        except urllib.error.HTTPError as e:
+            logger.error("e:{}, traceback:{}".format(e.code, traceback.format_exc()))
+            messages.error(request, _('Unsubscribe user does not exist.'))
+            return render(request, 'list_summary', self.mailing_list.list_id)
+        if self._has_pending_unsub_req(email):
+            messages.error(
+                request,
+                _('You have a pending unsubscription request waiting for'
+                  ' moderator approval.'))
+            return redirect('list_summary', self.mailing_list.list_id)
+        try:
+            # send email
+            UnsubscribeEmailLib.send_email(email, self.mailing_list.list_id)
+            messages.success(request, _('The unsubscribe email sent to %s has been successful.') % email)
+        except Exception as e:
+            logger.error("e:{}, traceback:{}".format(e, traceback.format_exc()))
+            messages.error(request, _('Send Email Failed'))
+        return redirect('list_summary', self.mailing_list.list_id)
+
+
+class AnonymousUnsubscribeView(MailingListView):
+    def get(self, request, *args, **kwargs):
+        data = request.GET.get("k")
+        if data is None:
+            logger.error("[AnonymousUnsubscribeView] receive:{}".format(data))
+            messages.error(request, _('Lack of params.'))
+            return redirect('list_summary', self.mailing_list.list_id)
+        try:
+            dict_data = UnsubscribeEmailLib.parse_text(data)
+        except Exception as e:
+            logger.error("[AnonymousUnsubscribeView] receive:{}, e:{}".format(data, str(e)))
+            messages.error(request, _('Invalid Link.'))
+            return redirect('list_summary', self.mailing_list.list_id)
+        if "email" not in dict_data.keys() or "list_id" not in dict_data.keys():
+            logger.error("[AnonymousUnsubscribeView] receive:{}".format(data))
+            messages.error(request, _('Invalid Link.'))
+            return redirect('list_summary', self.mailing_list.list_id)
+        try:
+            email_str = dict_data["email"]
+            response = self.mailing_list.unsubscribe(email_str)
+            if response is not None and response.get('token') is not None:
+                messages.success(
+                    request, _('Your unsubscription request has been'
+                               ' submitted and is waiting for moderator'
+                               ' approval.'))
+            else:
+                messages.success(request, _('%s has been unsubscribed'
+                                            ' from this list.') % dict_data["email"])
+        except ValueError as e:
+            messages.error(request, e)
         return redirect('list_summary', self.mailing_list.list_id)
 
 

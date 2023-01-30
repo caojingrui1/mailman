@@ -123,6 +123,20 @@
           <p hidden>{% trans 'Subscribe' %}</p>
         </form>
       </div>
+      <hr />
+      <div>
+        <p>
+        {% blocktrans %}
+        You can also unsubscribe without creating an account.
+        If you wish to do so, please use the form below.
+        {% endblocktrans%}
+        </p>
+        <form action="{% url 'anonymous_unsubscribe_email' list.list_id %}"
+              method="post" class="form-horizontal">
+          {% bootstrap_form_horizontal anonymous_unsubscription_form 2 8 'Unsubscribe' %}
+          <p hidden>{% trans 'Subscribe' %}</p>
+        </form>
+      </div>
     {% endif %}
 
     {# List metrics #}
