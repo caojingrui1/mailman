@@ -62,7 +62,7 @@ class UnsubscribeEmailLib(object):
     @classmethod
     def send_email(cls, email, list_id):
         """send the unsubscribe email to user"""
-        domain = settings.DEFAULT_FROM_EMAIL.split("@")[-1]
+        domain = settings.DEFAULT_FROM_EMAIL.split("@")[-1].strip()
         # https://mailweb.osinfra.cn/postorius/lists/tom.lists.osinfra.cn/anonymous_subscribe
         save_dict = {
             "email": email,
