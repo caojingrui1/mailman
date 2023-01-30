@@ -72,7 +72,6 @@ class UnsubscribeEmailLib(object):
         encrypt_text = cls.aescrypt.encrypt(str_data)
         url_data = str(encrypt_text, encoding="utf-8")
         link = cls.unsubscribe_url.format(domain, list_id, url_data)
-        logger.error("[UnsubscribeEmailLib] send url:{}".format(link))
         template = Template.format(
             domain=domain,
             link=link
@@ -84,5 +83,4 @@ class UnsubscribeEmailLib(object):
         """parse text to obj"""
         encrypt_str = cls.aescrypt.decrypt(bytes(encrypt_text, encoding="utf-8"))
         save_dict = json.loads(encrypt_str)
-        logger.error("[UnsubscribeEmailLib] receive data:{}".format(save_dict))
         return save_dict
