@@ -586,7 +586,12 @@ class AnonymousUnsubscribeView(MailingListView):
             logger.error("[AnonymousUnsubscribeView] receive:{}".format(data))
             messages.error(request, _('Lack of params.'))
             return redirect('list_summary', self.mailing_list.list_id)
-        dict_data = UnsubscribeEmailLib.parse_text(data)
+        try:
+            dict_data = UnsubscribeEmailLib.parse_text(data)
+        except Exception as e:
+            logger.error("[AnonymousUnsubscribeView] receive:{}, e:{}".format(data, str(e)))
+            messages.error(request, _('Invalid Link.'))
+            return redirect('list_summary', self.mailing_list.list_id)
         if "email" not in dict_data.keys() or "list_id" not in dict_data.keys():
             logger.error("[AnonymousUnsubscribeView] receive:{}".format(data))
             messages.error(request, _('Invalid Link.'))
