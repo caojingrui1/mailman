@@ -16,7 +16,8 @@ docker build -t mailman-web:v1.0.0 .
 export SECRET_KEY=**********************                                 # django的密钥
 export MAILMAN_ADMIN_USER=zhuchao                                        # admin的用户名字，用于在django中创建超级用户， 用于登录后台服务
 export MAILMAN_ADMIN_EMAIL=tom_toworld@163.com                           # admin的邮箱，用于在django中创建超级用户， 用于接收验证登录邮箱
-export SERVE_FROM_DOMAIN=lists.osinfra.cn                                # 设置列表域名，比如lists.osinfra.cn, 用于列表中title展示的域名
+export SERVE_FROM_DOMAIN=lists.osinfra.cn                                # 设置列表域名，比如lists.osinfra.cn, 用于发送邮件列表的title
+export SERVE_WEB_DOMAIN=mailweb.osinfra.cn                               # 用于mailman-web的allow-hosts
 export DATABASE_TYPE=postgres                                            # 对接数据库的类型, 例如: mysql/postgres
 export DATABASE_URL=postgres://admin:password@ip:5432/mailman            # 对接数据库的url信息,如果对接mysql则是：mysql://admin:password@ip:3306/mailman
 export SMTP_HOST=172.17.0.6                                              # 对接smtp的ip, 用于创建用户，验证信息使用
