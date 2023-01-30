@@ -53,8 +53,7 @@ class UnsubscribeEmailLib(object):
         if not isinstance(recipient_list, list):
             recipient_list = [recipient_list]
         subject = "[{}] Unsubscribe Verification Link".format(domain)
-        current_host = os.environ.get('SERVE_FROM_DOMAIN', 'localhost.local')
-        from_email = "postorius@{}".format(current_host)
+        from_email = settings.DEFAULT_FROM_EMAIL
         auth_user = settings.EMAIL_HOST_USER
         auth_password = settings.EMAIL_HOST_PASSWORD
         send_mail(subject, None, from_email, recipient_list, auth_user=auth_user, auth_password=auth_password,
