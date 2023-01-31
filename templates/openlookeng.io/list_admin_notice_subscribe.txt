@@ -6,8 +6,10 @@
 
     $user_email
 
-在开始使用本站的邮件列表服务之前，请确认这是您的邮箱。你可以通过回复此消息来
-进行确认，请保持回信的主题不变。
+在开始使用本站的邮件列表服务之前，请确认这是您的邮箱。你可以通过点击以下链接来
+进行确认：
+
+    https://mailweb.openlookeng.io/postorius/lists/$list_id/confirm/?token=$token
 
 若您不想注册该邮箱，请忽略此消息。若您怀疑自己被恶意订阅了该列表或有其他任何
 疑问，请联系：
@@ -26,9 +28,10 @@ We have received a registration request for the email address
 
     $user_email
 
-Before you can start using GNU Mailman at this site, you must first confirm
-that this is your email address. You can do this by replying to this message,
-keeping the Subject header intact.
+Before starting to use the mailing list service of this site, please confirm that this is your mailbox. You can click on the link below to
+Undergo verification:
+
+    https://mailweb.openlookeng.io/postorius/lists/$list_id/confirm/?token=$token
 
 If you do not wish to register this email address, simply disregard this
 message. If you think you are being maliciously subscribed to the list, or
