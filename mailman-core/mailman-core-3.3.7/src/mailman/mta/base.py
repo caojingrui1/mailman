@@ -70,15 +70,6 @@ class BaseDelivery:
         # Since the recipients can be a set or a list, sort the recipients by
         # email address for predictability and testability.
         try:
-            from_msg_list = re.findall(r'<(.*?)>', msg["From"])
-            if len(from_msg_list) == 1:
-                msg_list = from_msg_list[0].split("@")
-                if msg_list[-1] in ["qq.com", "huawei.com", "h-partners.com"]:
-                    list_id_list = re.findall(r'<(.*?)>', msg["List-Id"])
-                    if len(list_id_list) == 1:
-                        list_domain = list_id_list[0].replace(".", "@", 1)
-                        del msg["From"]
-                        msg["From"] = list_domain
             refused = self._connection.sendmail(
                 sender, sorted(recipients), msg)
         except smtplib.SMTPRecipientsRefused as error:
