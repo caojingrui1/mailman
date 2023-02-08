@@ -93,7 +93,7 @@ crypt的认证日志截图：
 
 补充点： tls和auth只能处理发送到exim4的数据加密，而从exim4发送到qq则使用25端口+starttls， 而无法使用smtps。截图为证：
 
-![qq_tls](assert\qq_tls.png)
+![qq_tls](assert/qq_tls.png)
 
 
 
