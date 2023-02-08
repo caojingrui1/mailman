@@ -31,10 +31,10 @@ crypt16的认证日志截图：
 
 以下截图为失败时截图，只有失败才会输出打印，其中： crypteq： using crypt16()则是使用crypt16算法认证。
 
-![crypt16](assert\crypt16.png)
+![crypt16](assert/crypt16.png)
 
 crypt的认证日志截图：
-以下截图为失败时截图，只有失败才会输出打印，其中： crypteq： using crypt则是使用crypt算法认证。![crypt](assert\crypt.png)
+以下截图为失败时截图，只有失败才会输出打印，其中： crypteq： using crypt则是使用crypt算法认证。![crypt](assert/crypt.png)
 
 解决方法：编译的时候注释：# DEFAULT_CRYPT=crypt16， 采取默认的加密方法: crypt; 详细解释如下：
 
