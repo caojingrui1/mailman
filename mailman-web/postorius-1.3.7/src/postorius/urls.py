@@ -155,6 +155,7 @@ urlpatterns = [
             name='domain_template_delete'),
     # /lists/
     re_path(r'^lists/$', list_views.list_index, name='list_index'),
+    re_path(r'^all_lists/$', list_views.all_list_index, name='all_list_index'),
     re_path(r'^lists/new/$', list_views.list_new, name='list_new'),
     re_path(r'^lists/(?P<list_id>[^/]+)/', include(list_patterns)),
 

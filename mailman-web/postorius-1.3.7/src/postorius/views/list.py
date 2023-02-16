@@ -572,7 +572,7 @@ class AnonymousUnsubscribeEmailView(MailingListView):
         try:
             # send email
             UnsubscribeEmailLib.send_email(email, self.mailing_list.list_id)
-            messages.success(request, _('The unsubscribe email sent to %s has been successful.') % email)
+            messages.success(request, _('Please check your inbox for further instructions.'))
         except Exception as e:
             logger.error("e:{}, traceback:{}".format(e, traceback.format_exc()))
             messages.error(request, _('Send Email Failed'))
@@ -1046,6 +1046,21 @@ def list_index(request, template='postorius/index.html'):
                    'check_advertised': True,
                    'all_lists': True,
                    'domain_count': domain_count})
+
+
+def all_list_index(request):
+    """get all list info"""
+    from django.http import JsonResponse, HttpResponseForbidden
+    if request.method == "GET":
+        client = get_mailman_client()
+        mailman_lists = client.get_lists(advertised=False)
+        ret_list = list()
+        for mailman_obj in mailman_lists:
+            mailman_info = {key: getattr(mailman_obj, key) for key in mailman_obj._properties}
+            ret_list.append(mailman_info)
+        return JsonResponse(data=ret_list, safe=False)
+    else:
+        return HttpResponseForbidden()
 
 
 @login_required

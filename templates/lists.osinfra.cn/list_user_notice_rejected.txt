@@ -1,6 +1,7 @@
-Your message to the $listname mailing-list was rejected for the following
-reasons:
+由于以下原因，您发送到 $listname 邮件列表的消息被拒绝
+Your message to the $listname mailing-list was rejected for the following reasons:
 
 $reasons
 
+附上Mailman收到的原始邮件。
 The original message as received by Mailman is attached.

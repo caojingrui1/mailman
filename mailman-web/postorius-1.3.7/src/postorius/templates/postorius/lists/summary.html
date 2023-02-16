@@ -11,9 +11,11 @@
 {% endblock %}
 
 {% block content %}
-
-    {% list_nav 'list_summary' 'msgid:title:list_summary' %}
-
+    {% if user.is_authenticated %}
+        {% list_nav 'list_summary' 'msgid:title:list_summary' %}
+    {% else %}
+        <h2>{% trans 'Summary' %}</h2>
+    {% endif %}
     <p>{{ list.settings.description }}</p>
     {% if list.settings.info %}
         {% autoescape off %}
@@ -21,24 +23,13 @@
         {% endautoescape %}
     {% endif %}
     <p>{% trans 'To contact the list owners, use the following email address:' %} <em>{{ list.settings.owner_address }}</em></p>
-
-    {# Archives #}
-    {% if hyperkitty_enabled %}
-      {% if not public_archive and not user.is_authenticated %}
-        <p>
-          {% trans 'You have to login to visit the archives of this list.' %}
-        </p>
-      {% else %}
+    <p>
+        {% trans 'To access archived information, please click the link:' %}
         {% url 'hk_list_overview' list.fqdn_listname as hyperkitty_list_url %}
-        <h2>{% trans 'Archives' %}</h2>
-        <p>
-          {% blocktrans %}
-            <a class="btn btn-primary" href="{{ hyperkitty_list_url }}">Archives</a>
-          {% endblocktrans %}
-        </p>
-      {% endif %}
-    {% endif %}
-
+        {% blocktrans %}
+            <a class="label-info" href="{{ hyperkitty_list_url }}">Archives</a>
+        {% endblocktrans %}
+    </p>
     <hr />
 
     {# Subscription #}
@@ -101,40 +92,28 @@
         {% endif %}
     {% else %}
       <div>
-        <h2>{% trans 'Subscription / Unsubscription' %}</h2>
-        <p>{% blocktrans %}
-        To subscribe or unsubscribe from this list, please log in first.
-        If you have not previously logged in, you may need to set up an account
-        with the appropriate email address.
-        {% endblocktrans %}</p>
-        <p><a href="{% url LOGIN_URL %}?next={{ next|default:request.path|urlencode }}" class="btn btn-primary">{% trans 'Log In' %}</a></p>
-      </div>
-      <hr />
-      <div>
+        <h2>{% trans 'Subscription' %}</h2>
         <p>
         {% blocktrans %}
-        You can also subscribe without creating an account.
-        If you wish to do so, please use the form below.
+        You can subscribe by using the form below.
         {% endblocktrans%}
         </p>
         <form action="{% url 'list_anonymous_subscribe' list.list_id %}"
               method="post" class="form-horizontal">
           {% bootstrap_form_horizontal anonymous_subscription_form 2 8 'Subscribe' %}
-          <p hidden>{% trans 'Subscribe' %}</p>
         </form>
       </div>
       <hr />
       <div>
+        <h2>{% trans 'Unsubscription' %}</h2>
         <p>
         {% blocktrans %}
-        You can also unsubscribe without creating an account.
-        If you wish to do so, please use the form below.
+        You can unsubscribe by using the form below.
         {% endblocktrans%}
         </p>
         <form action="{% url 'anonymous_unsubscribe_email' list.list_id %}"
               method="post" class="form-horizontal">
           {% bootstrap_form_horizontal anonymous_unsubscription_form 2 8 'Unsubscribe' %}
-          <p hidden>{% trans 'Subscribe' %}</p>
         </form>
       </div>
     {% endif %}
