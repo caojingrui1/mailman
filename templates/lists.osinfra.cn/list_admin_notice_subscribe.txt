@@ -5,8 +5,6 @@ Email Address Registration Confirmation
 Hello, this is the Mailman server at $domain. We have received a registration request for your email
 address.
 
-    $user_email
-
 在开始使用本站的邮件列表服务之前，请确认这是您的邮箱。你可以通过点击以下链接来进行确认：
 Before starting to use the mailing list service of this site, please confirm that this is your mailbox.
 You can click on the link below to Undergo verification:
