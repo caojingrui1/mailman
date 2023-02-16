@@ -1,4 +1,6 @@
-The attached message was received as a bounce, but either the bounce format
-was not recognized, or no member addresses could be extracted from it.  This
-mailing list has been configured to send all unrecognized bounce messages to
-the list administrator(s).
+附加邮件作为退回邮件收到，但退回邮件格式无法识别，或者无法从中提取成员地址。这邮件列表已配置为将所有无法识别的退回邮件
+发送至列表管理员。
+
+The attached message was received as a bounce, but either the bounce format was not recognized,
+or no member addresses could be extracted from it.  This mailing list has been configured to send
+all unrecognized bounce messages to the list administrator(s).
