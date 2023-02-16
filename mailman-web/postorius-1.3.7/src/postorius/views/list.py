@@ -1448,6 +1448,7 @@ def confirm_token(request, list_id):
         # Since we only accept the token there isn't any need for Form data. We
         # just need a POST request at this URL to accept the token.
         m_list.moderate_request(token, action='accept')
+        messages.success(request, _('Mailbox subscription mailing list success.'))
         return redirect('list_summary', m_list.list_id)
     # Get the token from url parameter.
     token = request.GET.get('token')
