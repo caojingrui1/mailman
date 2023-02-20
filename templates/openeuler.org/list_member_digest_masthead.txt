@@ -1,12 +1,15 @@
-Send $display_name mailing list submissions to
+将 $display_name 邮件列表提交发送至：
+Send $display_name mailing list submissions to:
 	$listname
 
-To subscribe or unsubscribe via email, send a message with subject or body
-'help' to
+要通过电子邮件订阅或取消订阅，请将主题或正文为“帮助”的消息发送至：
+To subscribe or unsubscribe via email, send a message with subject or body 'help' to:
 	$request_email
 
-You can reach the person managing the list at
+您可以通过以下方式联系管理列表的人员：
+You can reach the person managing the list at:
 	$owner_email
 
-When replying, please edit your Subject line so it is more specific than
+回复时，请编辑您的主题行，使其比以下内容更具体：
+When replying, please edit your Subject line so it is more specific than:
 "Re: Contents of $display_name digest..."

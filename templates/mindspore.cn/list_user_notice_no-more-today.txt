@@ -1,9 +1,11 @@
-We have received a message from your address <$sender_email> requesting an
-automated response from the $listname mailing list.
+我们已收到来自您的地址<$sender_email>的消息，要求$listname邮件列表自动回复。
+We have received a message from your address <$sender_email> requesting an automated response from
+the $listname mailing list.
 
-The number we have seen today: $count.  In order to avoid problems such as
-mail loops between email robots, we will not be sending you any further
-responses today.  Please try again tomorrow.
+我们今天看到的数字：$count。为了避免出现诸如电子邮件机器人之间的邮件循环，我们不会再向您发送今天的回应。请明天再试。
+The number we have seen today: $count.  In order to avoid problems such as mail loops between email
+robots, we will not be sending you any further responses today.  Please try again tomorrow.
 
-If you believe this message is in error, or if you have any questions, please
-contact the list owner at $owner_email.
+如果您认为此消息有误，或者您有任何疑问，请通过 $owner_email 联系列表所有者。
+If you believe this message is in error, or if you have any questions, please contact the list
+owner at $owner_email.

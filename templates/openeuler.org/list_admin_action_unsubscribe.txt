@@ -1,5 +1,5 @@
-Your authorization is required for a mailing list unsubscription
-request approval:
+    邮件列表退订请求批准需要您的授权：
+    Your authorization is required for a mailing list unsubscription request approval:
 
-    For:  $member
-    List: $listname
+        For:  $member
+        List: $listname

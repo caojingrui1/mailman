@@ -1,5 +1,3 @@
-Your message entitled
+$display_name邮件列表已成功收到您标题为$subject的消息。
+Your message entitled $subject was successfully received by the $display_name mailing list.
 
-    $subject
-
-was successfully received by the $display_name mailing list.

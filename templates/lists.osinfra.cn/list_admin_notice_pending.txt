@@ -1,7 +1,7 @@
 $listname列表有$count审核请求在等待。
 The $listname list has $count moderation requests waiting.
 
-$data
+    $data
 
 请在您方便的时候尽早处理此事。
 Please attend to this at your earliest convenience.

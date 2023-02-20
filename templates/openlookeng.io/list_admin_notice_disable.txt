@@ -1,4 +1,6 @@
-$member's subscription has been disabled on $listname due to their bounce score
-exceeding the mailing list's bounce_score_threshold.
+因为退回次数超过邮件列表的bounce_score_threshold，$member的订阅已在$listname上被禁用。
+$member's subscription has been disabled on $listname due to their bounce score exceeding the
+mailing list's bounce_score_threshold.
 
+附加触发 DSN（如果可用）。
 The triggering DSN if available is attached.

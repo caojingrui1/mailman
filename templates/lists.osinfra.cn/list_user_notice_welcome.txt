@@ -1,12 +1,12 @@
-欢迎使用“$display_name”邮件列表！
-Welcome to the "$display_name" mailing list!
+    欢迎使用“$display_name”邮件列表！
+    Welcome to the "$display_name" mailing list!
 
-要通过此列表交流，请发送电子邮件至:
-To post to this list, send your email to:
+    要通过此列表交流，请发送电子邮件至:
+    To post to this list, send your email to:
 
-    $listname
+        $listname
 
-要退订此列表，请访问：
-To unsubscribe from this list, please visit:
+    要退订此列表，请访问：
+    To unsubscribe from this list, please visit:
 
-    https://mailweb.osinfra.cn/postorius/lists/$list_id/
+        https://mailweb.osinfra.cn/postorius/lists/$list_id/

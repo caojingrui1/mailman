@@ -10,12 +10,10 @@ We have received an unsubscription request for the email address
     $user_email
 
 在Mailman可以取消订阅之前，您必须先确认您的请求。您可以通过简单地回复此邮件来完成。
-Before Mailman can unsubscribe you, you must first confirm your request.You can do this by simply
-replying to this message.
+Before Mailman can unsubscribe you, you must first confirm your request.You can do this by simply replying to this message.
 
 或者您应该在发送给$request_email的消息中包含以下行——并且仅包含以下行：
-Or you should include the following line -- and only the following line -- in a message to
-$request_email:
+Or you should include the following line -- and only the following line -- in a message to $request_email:
 
     confirm $token
 
@@ -23,7 +21,6 @@ $request_email:
 Note that simply sending a `reply' to this message should work from most mail readers.
 
 如果您不想取消订阅此电子邮件地址，请忽略此消息。 如果您认为您被恶意退订列表，或有任何其他问题，您可以联系：
-If you do not wish to unsubscribe this email address, simply disregard this message.  If you think
-you are being maliciously unsubscribed from the list, or have any other questions, you may contact:
+If you do not wish to unsubscribe this email address, simply disregard this message.  If you think you are being maliciously unsubscribed from the list, or have any other questions, you may contact:
 
     $owner_email

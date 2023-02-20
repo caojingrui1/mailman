@@ -1,20 +1,22 @@
+$listname邮件列表的帮助
 Help for $listname mailing list
 
-This is email command 'help' for version $version of the GNU Mailman list
-manager at $domain.  The following describes commands you can send to get
-information about and control your subscription to Mailman lists at this site.
-A command can be in the Subject line or in the body of the message.
+这是$domain域的版本为$version的电子邮件命令“帮助”。以下描述了您可以发送以获取的命令,关于您在本网站订阅
+Mailman列表的信息和管理。命令可以位于主题行或邮件正文中。
+This is email command 'help' for version $version of the Mailman list manager at $domain.
+The following describes commands you can send to get information about and control your
+subscription to Mailman lists at this site. A command can be in the Subject line or in
+the body of the message.
 
+命令应发送到 ${listname}-request@${domain} 地址。
 Commands should be sent to the ${listname}-request@${domain} address.
 
-About the descriptions - words in "<>"s signify REQUIRED items and
-words in "[]" denote OPTIONAL items.  Do not include the "<>"s or
-"[]"s when you use the commands.
-
+以下命令有效：
 The following commands are valid:
 
     $commands
 
+需要引起人们注意的问题和疑虑应发送至：
 Questions and concerns for the attention of a person should be sent to:
 
     $administrator
