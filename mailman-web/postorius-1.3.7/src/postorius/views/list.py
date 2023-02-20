@@ -1053,7 +1053,7 @@ def all_list_index(request):
     from django.http import JsonResponse, HttpResponseForbidden
     if request.method == "GET":
         client = get_mailman_client()
-        mailman_lists = client.get_lists(advertised=False)
+        mailman_lists = client.get_lists(advertised=True)
         ret_list = list()
         for mailman_obj in mailman_lists:
             mailman_info = {key: getattr(mailman_obj, key) for key in mailman_obj._properties}
