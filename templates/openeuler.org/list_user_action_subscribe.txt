@@ -1,40 +1,15 @@
 邮箱订阅确认
-
-您好，这是$domain的邮件列表服务。
-
-我们收到来自以下邮箱的注册请求：
-
-    $user_email
-
-在开始使用本站的邮件列表服务之前，请确认这是您的邮箱。你可以通过点击以下链接来
-进行确认：
-
-    https://mailweb.openeuler.org/postorius/lists/$list_id/confirm/?token=$token
-
-若您不想注册该邮箱，请忽略此消息。若您怀疑自己被恶意订阅了该列表或有其他任何
-疑问，请联系：
-
-    contact@openeuler.io
-
-
-
-
-
 Email Address Registration Confirmation
 
-Hello, this is the GNU Mailman server at $domain.
+您好，这是$domain的邮件列表服务，我们收到来自您的邮箱地址的订阅请求。
+Hello, this is the Mailman server at $domain. We have received a registration request for your email address.
 
-We have received a registration request for the email address
-
-    $user_email
-
-Before starting to use the mailing list service of this site, please confirm that this is your mailbox. You can click on the link below to
-Undergo verification:
+在开始使用本站的邮件列表服务之前，请确认这是您的邮箱。你可以通过点击以下链接来进行确认：
+Before starting to use the mailing list service of this site, please confirm that this is your mailbox. You can click on the link below to Undergo verification:
 
     https://mailweb.openeuler.org/postorius/lists/$list_id/confirm/?token=$token
 
-If you do not wish to register this email address, simply disregard this
-message. If you think you are being maliciously subscribed to the list, or
-have any other questions, you may contact
+若您不想注册该邮箱，请忽略此消息。若您怀疑自己被恶意订阅了该列表或有其他任何疑问，请联系：
+If you do not wish to register this email address, simply disregard this message. If you think you are being maliciously subscribed to the list, or have any other questions, you may contact:
 
-    contact@openeuler.io
+    $owner_email

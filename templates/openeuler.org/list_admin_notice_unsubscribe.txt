@@ -1,1 +1,2 @@
-$member has been removed from $display_name.
+    $member已经从$display_name移除。
+    $member has been removed from $display_name.

@@ -1,26 +1,2 @@
-电子邮件地址退订确认
-Email Address Unsubscription Confirmation
-
-您好，这是$domain中的Mailman服务器。
-Hello, this is the Mailman server at $domain.
-
-我们已收到电子邮件地址的退订请求。
-We have received an unsubscription request for the email address
-
-    $user_email
-
-在Mailman可以取消订阅之前，您必须先确认您的请求。您可以通过简单地回复此邮件来完成。
-Before Mailman can unsubscribe you, you must first confirm your request.You can do this by simply replying to this message.
-
-或者您应该在发送给$request_email的消息中包含以下行——并且仅包含以下行：
-Or you should include the following line -- and only the following line -- in a message to $request_email:
-
-    confirm $token
-
-请注意，大多数邮件阅读器只需发送“回复”邮件即可。
-Note that simply sending a `reply' to this message should work from most mail readers.
-
-如果您不想取消订阅此电子邮件地址，请忽略此消息。 如果您认为您被恶意退订列表，或有任何其他问题，您可以联系：
-If you do not wish to unsubscribe this email address, simply disregard this message.  If you think you are being maliciously unsubscribed from the list, or have any other questions, you may contact:
-
-    $owner_email
+$member已经从$display_name中移除。
+$member has been removed from $display_name.

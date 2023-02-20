@@ -9,7 +9,7 @@
     该消息被搁置是因为：
     The message is being held because:
 
-        $reasons
+    $reasons
 
     要么该消息将被发表到列表，要么你将收到审核员的决定通知。
     Either the message will get posted to the list, or you will receive notification of the moderator's decision.

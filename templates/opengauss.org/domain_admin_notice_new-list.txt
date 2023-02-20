@@ -1,11 +1,8 @@
 刚为您创建了邮件列表“$listname”。以下是关于您的邮件列表的一些基本信息。
-The mailing list '$listname' has just been created for you.The following is some basic
-information about your mailing list.
+The mailing list '$listname' has just been created for you.The following is some basic information about your mailing list.
 
-您列表中的用户（不是管理员）有一个基于电子邮件的界面；您可以通过发送仅包含“帮助”一词的消息来获取有关使用它的信息作为主
-题或在体内，发送到：
-There is an email-based interface for users (not administrators) of your list;you can get info
-about using it by sending a message with just the word 'help' as subject or in the body,to:
+您列表中的用户（不是管理员）有一个基于电子邮件的界面；您可以通过发送仅包含“帮助”一词的消息来获取有关使用它的信息作为主题或在体内，发送到：
+There is an email-based interface for users (not administrators) of your list;you can get info about using it by sending a message with just the word 'help' as subject or in the body,to:
 
     $request_email
 

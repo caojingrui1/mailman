@@ -1,8 +1,7 @@
-Your subscription has been disabled on the $listname mailing list because it has
-received a number of bounces indicating that there may be a problem delivering
-messages to $sender_email. You may want to check with your mail administrator
-for more help.
+您的订阅已在 $listname 邮件列表中被禁用，因为它有收到多次退回，表明发送到$sender_email的消息可能存在问题，您可能需要咨询您的邮件管理员寻求更多帮助。
+Your subscription has been disabled on the $listname mailing list because it has received a number of bounces indicating that there may be a problem delivering messages to $sender_email, You may want to check with your mail administrator for more help.
 
-If you have any questions or problems, you can contact the mailing list owner at
+如果您有任何疑问或问题，可以通过以下方式联系邮件列表所有者：
+If you have any questions or problems, you can contact the mailing list owner at:
 
     $owner_email
