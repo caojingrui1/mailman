@@ -1,32 +1,13 @@
-欢迎使用“$display_name”邮件列表！
+    欢迎使用“$display_name”邮件列表！
+    Welcome to the "$display_name" mailing list!
 
-要通过此列表交流，请发送电子邮件至:
+    要通过此列表交流，请发送电子邮件至:
+    To post to this list, send your email to:
 
-    $listname
+        $listname
 
-取消订阅或调整选项请发送电子邮件至:
+    要退订此列表，请访问：
+    To unsubscribe from this list, please visit:
 
-    $short_listname-leave@$domain
+        https://mailweb.mindspore.cn/postorius/lists/$list_id/
 
-在主题或正文中使用"help"一词(不包括引号), 您将会收到一条带有说明的信息。更改
-设置需要用到密码，但出于安全考虑，此处不包括此密码。如果您忘记了密码，则需要
-通过网络用户界面重置密码。
-
-
-
-Welcome to the "$display_name" mailing list!
-
-To post to this list, send your email to:
-
-  $listname
-
-You can unsubscribe or make adjustments to your options via email by sending
-a message to:
-
-  $short_listname-leave@$domain
-
-with the word 'help' in the subject or body (don't include the quotes), and
-you will receive a message with instructions. You will need your password to
-change your options, but for security purposes, this password is not included
-here. If you have forgotten your password, you will need to reset it via the
-web UI.

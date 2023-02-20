@@ -4,10 +4,9 @@ Your request to the $listname mailing list
     $request
 
 已被列表管理员拒绝。主持人给出了拒绝您请求的原因如下：
-has been rejected by the list moderator.  The moderator gave the following reason for rejecting
-your request:
+has been rejected by the list moderator.  The moderator gave the following reason for rejecting your request:
 
-"$reason"
+    "$reason"
 
 如有任何问题或意见，请联系列表管理员：
 Any questions or comments should be directed to the list administrator at:

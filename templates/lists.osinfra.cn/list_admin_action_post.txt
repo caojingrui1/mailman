@@ -8,7 +8,7 @@ As list administrator, your authorization is requested for the following mailing
 该消息被搁置是因为：
 The message is being held because:
 
-$reasons
+    $reasons
 
 在你方便的时候，请访问您的仪表板以批准或拒绝该请求。
 At your convenience, visit your dashboard to approve or deny the request.

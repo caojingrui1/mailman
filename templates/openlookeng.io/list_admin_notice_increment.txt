@@ -1,3 +1,8 @@
+$member在$listname上的退回分数正在增加。
 $member's bounce score on $listname has been incremented.
 
+附加触发 DSN（如果可用）。
 The triggering DSN if available is attached.
+
+
+

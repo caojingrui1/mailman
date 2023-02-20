@@ -1,2 +1,2 @@
-退订成功！您将不再接收邮件列表$listname发送的通知。
-You have successfully UNSUBSCRIBED from the mailing list $listname.
+    退订成功！您将不再接收邮件列表$listname发送的通知。
+    You have successfully UNSUBSCRIBED from the mailing list $listname.

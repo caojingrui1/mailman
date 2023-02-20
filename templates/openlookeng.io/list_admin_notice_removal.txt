@@ -1,1 +1,2 @@
+由于退回次数过多，$member已从$listname退订。
 $member has been unsubscribed from $listname due to excessive bounces.

@@ -1,26 +1,15 @@
-你发给“$listname”的主题为
+    你发给“$listname”的主题为：
+    Your mail to '$listname' with the subject:
 
-    $subject
+        $subject
 
-的邮件已被搁置，直到列表版主审阅通过。
+    的邮件已被搁置，直到列表版主审阅通过。
+    Is being held until the list moderator can review it for approval.
 
-该消息被搁置是因为：
+    该消息被搁置是因为：
+    The message is being held because:
 
-$reasons
+    $reasons
 
-要么该消息将被发表到列表，要么你将收到审核员的决定通知。
-
-
-
-Your mail to '$listname' with the subject
-
-    $subject
-
-Is being held until the list moderator can review it for approval.
-
-The message is being held because:
-
-$reasons
-
-Either the message will get posted to the list, or you will receive
-notification of the moderator's decision.
+    要么该消息将被发表到列表，要么你将收到审核员的决定通知。
+    Either the message will get posted to the list, or you will receive notification of the moderator's decision.
