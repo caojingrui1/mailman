@@ -14,7 +14,7 @@
     {% if user.is_authenticated %}
         {% list_nav 'list_summary' 'msgid:title:list_summary' %}
     {% else %}
-        <h2>{% trans 'Summary' %}</h2>
+        <h2>Summary</h2>
     {% endif %}
     <p>{{ list.settings.description }}</p>
     {% if list.settings.info %}
