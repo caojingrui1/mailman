@@ -16,6 +16,7 @@ class TokenOwner:
 
 def cancel_subscribe_pending(mailman_url, mailman_username, mailman_password):
     """cancel subscribe pending"""
+    print("2.start to cancel subscribe pending")
     client = Client(mailman_url, mailman_username, mailman_password)
     all_mailman_list = client.get_lists()
     for mailman_list in all_mailman_list:
@@ -30,12 +31,14 @@ def cancel_subscribe_pending(mailman_url, mailman_username, mailman_password):
             else:
                 print("Not discard the list：{}; email:{}, because the request is not expired(create<5min)".format(req["list_id"],
                                                                                                                   req["email"]))
+    print("3.end to cancel subscribe pending")
 
 
 if __name__ == '__main__':
     url = os.getenv("mailman_url")
     username = os.getenv("mailman_username")
     password = os.getenv("mailman_password")
+    print("1.check the env:mailman_url.mailman_username.mailman_password")
     if not all([url, username, password]):
         raise RuntimeError("Please check the env of mailman_url.mailman_username.mailman_password ")
     cancel_subscribe_pending(url, username, password)
