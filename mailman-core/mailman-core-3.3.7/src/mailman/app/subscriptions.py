@@ -451,21 +451,21 @@ class UnSubscriptionWorkflow(_SubscriptionWorkflowCommon):
     def _step_confirmation_checks(self):
         # If list's unsubscription policy is open, the user can unsubscribe
         # right now.
-        if self.mlist.unsubscription_policy is SubscriptionPolicy.open:
-            self.push('do_unsubscription')
-            return
+        # if self.mlist.unsubscription_policy is SubscriptionPolicy.open:
+        self.push('do_unsubscription')
+        return
         # If we don't need the user's confirmation, then skip to the moderation
         # checks.
-        if self.mlist.unsubscription_policy is SubscriptionPolicy.moderate:
-            self.push('moderation_checks')
-            return
+        # if self.mlist.unsubscription_policy is SubscriptionPolicy.moderate:
+        #     self.push('moderation_checks')
+        #     return
         # If the request is pre-confirmed, then the user can unsubscribe right
         # now.
-        if self.pre_confirmed:
-            self.push('do_unsubscription')
-            return
+        # if self.pre_confirmed:
+        #     self.push('do_unsubscription')
+        #     return
         # The user must confirm their un-subsbcription.
-        self.push('send_confirmation')
+        # self.push('send_confirmation')
 
     def _step_send_confirmation(self):
         self._set_token(TokenOwner.subscriber)
