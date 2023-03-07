@@ -5,6 +5,7 @@ from django.http import (
     Http404,
     HttpResponsePermanentRedirect,
     HttpResponseRedirect,
+    HttpResponseForbidden
 )
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
@@ -688,15 +689,16 @@ class PasswordResetView(AjaxCapableProcessFormViewMixin, FormView):
         return get_form_class(app_settings.FORMS, "reset_password", self.form_class)
 
     def form_valid(self, form):
-        r429 = ratelimit.consume_or_429(
-            self.request,
-            action="reset_password_email",
-            key=form.cleaned_data["email"].lower(),
-        )
-        if r429:
-            return r429
-        form.save(self.request)
-        return super(PasswordResetView, self).form_valid(form)
+        return HttpResponseForbidden(content=b'Operation prohibited, please contact administrator')
+        # r429 = ratelimit.consume_or_429(
+        #     self.request,
+        #     action="reset_password_email",
+        #     key=form.cleaned_data["email"].lower(),
+        # )
+        # if r429:
+        #     return r429
+        # form.save(self.request)
+        # return super(PasswordResetView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
         ret = super(PasswordResetView, self).get_context_data(**kwargs)
