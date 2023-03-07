@@ -27,7 +27,7 @@ urlpatterns = [
         name="account_confirm_email",
     ),
     # password reset
-    path("password/reset/", views.password_reset, name="account_reset_password"),
+    # path("password/reset/", views.password_reset, name="account_reset_password"),
     path(
         "password/reset/done/",
         views.password_reset_done,
