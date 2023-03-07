@@ -33,7 +33,9 @@ export DJANGO_ALLOWED_HOSTS=ip                                           # mailm
 export POSTORIUS_TEMPLATE_BASE_URL=http://mailman-web-service.mail.svc.cluster.local:80    # 模板的url, mailman-web服务
 export PRIVACY_LINK=https://www.openeuler.org/en/other/privacy/                            # 订阅邮件列表的隐私声明
 export CONDUCT_LINK=https://www.openeuler.org/en/community/conduct/                        # 订阅邮件列表的行为守则
-
+export redis_ip=127.0.0.1                                                                  # redis的ip
+export redis_port=6379                                                                     # redis的端口
+export redis_password=*****                                                                # redis的密码
 
 3.启动容器
 docker run --env-file env -dit --name mailman-web -p 8000:8000 -p 8080:8080 mailman-web:v1.0.0
