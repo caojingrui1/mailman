@@ -27,12 +27,12 @@ urlpatterns = [
         name="account_confirm_email",
     ),
     # password reset
-    path("password/reset/", views.password_reset, name="account_reset_password"),
-    path(
-        "password/reset/done/",
-        views.password_reset_done,
-        name="account_reset_password_done",
-    ),
+    # path("password/reset/", views.password_reset, name="account_reset_password"),
+    # path(
+    #     "password/reset/done/",
+    #     views.password_reset_done,
+    #     name="account_reset_password_done",
+    # ),
     re_path(
         r"^password/reset/key/(?P<uidb36>[0-9A-Za-z]+)-(?P<key>.+)/$",
         views.password_reset_from_key,
