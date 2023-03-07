@@ -573,7 +573,7 @@ class AnonymousUnsubscribeEmailView(MailingListView):
             # 1.check pending
             key = "unsubscribe_{}_{}".format(self.mailing_list.list_id, email)
             if cache.has_key(key):
-                messages.error(request, _('The Unsubscription request already pending.'))
+                messages.error(request, _('The unsubscription request already pending.'))
                 return redirect('list_summary', self.mailing_list.list_id)
             # 2.send email
             UnsubscribeEmailLib.send_email(email, self.mailing_list.list_id)
