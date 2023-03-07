@@ -24,7 +24,7 @@ import sys
 import traceback
 import urllib
 from urllib.error import HTTPError
-
+from django.core import cache
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -570,8 +570,15 @@ class AnonymousUnsubscribeEmailView(MailingListView):
                   ' moderator approval.'))
             return redirect('list_summary', self.mailing_list.list_id)
         try:
-            # send email
+            # 1.check pending
+            key = "unsubscribe_{}_{}".format(self.mailing_list.list_id, email)
+            if cache.has_key(key):
+                messages.error(request, _('The Unsubscription request already pending.'))
+                return redirect('list_summary', self.mailing_list.list_id)
+            # 2.send email
             UnsubscribeEmailLib.send_email(email, self.mailing_list.list_id)
+            # 3.set pending
+            cache.set(key, "1", settings.VERIFICATION_CODE_EXPIRATION)
             messages.success(request, _('Please check your inbox for further instructions.'))
         except Exception as e:
             logger.error("e:{}, traceback:{}".format(e, traceback.format_exc()))
@@ -596,6 +603,10 @@ class AnonymousUnsubscribeView(MailingListView):
             logger.error("[AnonymousUnsubscribeView] receive:{}".format(data))
             messages.error(request, _('Invalid Link.'))
             return redirect('list_summary', self.mailing_list.list_id)
+        key = "unsubscribe_{}_{}".format(self.mailing_list.list_id, dict_data['email'])
+        if not cache.has_key(key):
+            messages.error(request, _('The token expired or invalid.'))
+            return redirect('list_summary', self.mailing_list.list_id)
         try:
             email_str = dict_data["email"]
             response = self.mailing_list.unsubscribe(email_str)
@@ -609,6 +620,10 @@ class AnonymousUnsubscribeView(MailingListView):
                                             ' from this list.') % dict_data["email"])
         except ValueError as e:
             messages.error(request, e)
+        try:
+            cache.delete(key)
+        except Exception as e:
+            logger.error("e:{}".format(e))
         return redirect('list_summary', self.mailing_list.list_id)
 
 

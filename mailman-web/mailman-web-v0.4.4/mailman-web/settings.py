@@ -190,6 +190,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://{}:{}'.format(os.environ.get("redis_ip"), os.environ.get("redis_port", 6379)),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PASSWORD": os.environ.get("redis_password"),
+        },
+    },
+}
+
+VERIFICATION_CODE_EXPIRATION = 5 * 60
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
