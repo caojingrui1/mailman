@@ -24,7 +24,7 @@ import sys
 import traceback
 import urllib
 from urllib.error import HTTPError
-from django.core import cache
+from django.core.cache import cache
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
