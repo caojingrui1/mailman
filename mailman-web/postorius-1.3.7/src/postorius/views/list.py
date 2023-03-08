@@ -561,7 +561,7 @@ class AnonymousUnsubscribeEmailView(MailingListView):
             client.get_user(email)
         except urllib.error.HTTPError as e:
             logger.error("e:{}, traceback:{}".format(e.code, traceback.format_exc()))
-            messages.error(request, _('Please check your inbox for further instructions.'))
+            messages.success(request, _('Please check your inbox for further instructions.'))
             return redirect('list_summary', self.mailing_list.list_id)
         if self._has_pending_unsub_req(email):
             messages.error(
