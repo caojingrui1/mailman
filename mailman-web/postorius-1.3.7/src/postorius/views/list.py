@@ -562,7 +562,7 @@ class AnonymousUnsubscribeEmailView(MailingListView):
         except urllib.error.HTTPError as e:
             logger.error("e:{}, traceback:{}".format(e.code, traceback.format_exc()))
             messages.error(request, _('Unsubscribe user does not exist.'))
-            return render(request, 'list_summary', self.mailing_list.list_id)
+            return redirect('list_summary', self.mailing_list.list_id)
         if self._has_pending_unsub_req(email):
             messages.error(
                 request,
