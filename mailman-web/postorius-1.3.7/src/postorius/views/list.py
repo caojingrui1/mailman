@@ -561,7 +561,7 @@ class AnonymousUnsubscribeEmailView(MailingListView):
             client.get_user(email)
         except urllib.error.HTTPError as e:
             logger.error("e:{}, traceback:{}".format(e.code, traceback.format_exc()))
-            messages.error(request, _('Unsubscribe user does not exist.'))
+            messages.error(request, _('Please check your inbox for further instructions.'))
             return redirect('list_summary', self.mailing_list.list_id)
         if self._has_pending_unsub_req(email):
             messages.error(
@@ -591,7 +591,7 @@ class AnonymousUnsubscribeView(MailingListView):
         data = request.GET.get("k")
         if data is None:
             logger.error("[AnonymousUnsubscribeView] receive:{}".format(data))
-            messages.error(request, _('Lack of params.'))
+            messages.error(request, _('Invalid Link.'))
             return redirect('list_summary', self.mailing_list.list_id)
         try:
             dict_data = UnsubscribeEmailLib.parse_text(data)
