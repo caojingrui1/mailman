@@ -183,7 +183,9 @@ class Email(models.Model):
             msg["In-Reply-To"] = "<%s>" % unfold(self.in_reply_to)
 
         # Body
-        content = self.ADDRESS_REPLACE_RE.sub(r"\1(a)\2", self.content)
+        # fix a bug about archive char @ to (a) by TomNewChao
+        # content = self.ADDRESS_REPLACE_RE.sub(r"\1(a)\2", self.content)
+        content = self.content
 
         # Enforce `multipart/mixed` even when there are no attachments.
         msg.set_content(content, subtype='plain')
