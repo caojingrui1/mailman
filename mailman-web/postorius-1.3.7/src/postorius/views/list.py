@@ -572,6 +572,7 @@ class AnonymousUnsubscribeEmailView(MailingListView):
         try:
             # 1.check pending
             key = "unsubscribe_{}_{}".format(self.mailing_list.list_id, email)
+            key = key.lower()
             if cache.has_key(key):
                 messages.error(request, _('The unsubscription request already pending.'))
                 return redirect('list_summary', self.mailing_list.list_id)
@@ -604,6 +605,7 @@ class AnonymousUnsubscribeView(MailingListView):
             messages.error(request, _('Invalid Link.'))
             return redirect('list_summary', self.mailing_list.list_id)
         key = "unsubscribe_{}_{}".format(self.mailing_list.list_id, dict_data['email'])
+        key = key.lower()
         if not cache.has_key(key):
             messages.error(request, _('The token expired or invalid.'))
             return redirect('list_summary', self.mailing_list.list_id)
