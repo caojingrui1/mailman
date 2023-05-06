@@ -181,9 +181,9 @@ tls_privatekey = MAIN_TLS_PRIVATEKEY
 1.exim-adduser工具： 增加exim的认证用户
 
 ~~~bash
-cd app-mailman/mailman-exim/script/
-chmod 755 exim-addsuer
-./exim-addsuer  # 在对话框输入用户和密码则可以
+cd mailman/script/exim-adduser
+chmod 755 exim-adduser
+./exim-adduser  # 在对话框输入用户和密码则可以
 ~~~
 
 
