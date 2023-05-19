@@ -22,8 +22,8 @@ export DATABASE_TYPE=postgres                                            # 对�
 export DATABASE_URL=postgres://admin:password@ip:5432/mailman            # 对接数据库的url信息,如果对接mysql则是：mysql://admin:password@ip:3306/mailman
 export SMTP_HOST=172.17.0.6                                              # 对接smtp的ip, 用于创建用户，验证信息使用
 export SMTP_PORT=25                                                      # 对接smtp的port, 如果端口需要加密，请设置：SMTP_USE_TLS=True
-export EMAIL_HOST_USER=username                                          # 对接smtp的用户名
-export EMAIL_HOST_PASSWORD=password                                      # 对接smtp的密码
+export SMTP_HOST_USER=username                                           # 对接smtp的用户名
+export SMTP_HOST_PASSWORD=password                                       # 对接smtp的密码
 export MAILMAN_REST_URL=http://172.17.0.2:8001                           # 请求mailman-core服务的url， 参考mailman-core服务的配置
 export MAILMAN_REST_USER=restadmin                                       # 请求mailman-core服务的用户名， 参考mailman-core服务的配置
 export MAILMAN_REST_PASSWORD=restpass                                    # 请求mailman-core服务的密码， 参考mailman-core服务的配置
