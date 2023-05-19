@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License along with
 # Postorius.  If not, see <http://www.gnu.org/licenses/>.
 
-
+import re
 import csv
 import email.utils
 import logging
@@ -541,14 +541,11 @@ class ListAnonymousSubscribeView(MailingListView):
                 self.mailing_list.subscribe(
                     email, display_name,
                     pre_verified=False, pre_confirmed=False)
-                messages.success(request,
-                                 _('Please check your inbox for further instructions, Or you have already subscribed successfully'))
+                messages.success(request, _('Please check your inbox for further instructions,Or you have already subscribed successfully.'))
             else:
-                messages.error(request,
-                               _('Something went wrong. Please try again.'))
+                messages.error(request, _('The email you entered is invalid.'))
         except HTTPError as e:
-            messages.success(request,
-                             _('Please check your inbox for further instructions, Or you have already subscribed successfully'))
+            messages.success(request, _('Please check your inbox for further instructions,Or you have already subscribed successfully.'))
         return redirect('list_summary', self.mailing_list.list_id)
 
 
@@ -557,34 +554,35 @@ class AnonymousUnsubscribeEmailView(MailingListView):
         email = request.POST['email']
         # Verify the user actually controls this email, should
         # return 1 if the user owns the email, 0 otherwise.
+        pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+        if re.match(pattern, email) is None:
+            messages.error(request, _('The email you entered is invalid.'))
+            return redirect('list_summary', self.mailing_list.list_id)
         try:
             client = get_mailman_client()
             client.get_user(email)
         except urllib.error.HTTPError as e:
             logger.error("e:{}, traceback:{}".format(e.code, traceback.format_exc()))
-            messages.success(request, _('Please check your inbox for further instructions.'))
+            messages.success(request, _('Please check your inbox for further instructions, Or the unsubscription request already pending.'))
             return redirect('list_summary', self.mailing_list.list_id)
         if self._has_pending_unsub_req(email):
-            messages.error(
-                request,
-                _('You have a pending unsubscription request waiting for'
-                  ' moderator approval.'))
+            messages.success(request, _('Please check your inbox for further instructions, Or the unsubscription request already pending.'))
             return redirect('list_summary', self.mailing_list.list_id)
         try:
             # 1.check pending
             key = "unsubscribe_{}_{}".format(self.mailing_list.list_id, email)
             key = key.lower()
             if cache.has_key(key):
-                messages.error(request, _('The unsubscription request already pending.'))
+                messages.success(request, _('Please check your inbox for further instructions, Or the unsubscription request already pending.'))
                 return redirect('list_summary', self.mailing_list.list_id)
             # 2.send email
             UnsubscribeEmailLib.send_email(email, self.mailing_list.list_id)
             # 3.set pending
             cache.set(key, "1", settings.VERIFICATION_CODE_EXPIRATION)
-            messages.success(request, _('Please check your inbox for further instructions.'))
+            messages.success(request, _('Please check your inbox for further instructions, Or the unsubscription request already pending.'))
         except Exception as e:
             logger.error("e:{}, traceback:{}".format(e, traceback.format_exc()))
-            messages.error(request, _('Send Email Failed'))
+            messages.error(request, _('Failed to send email'))
         return redirect('list_summary', self.mailing_list.list_id)
 
 
