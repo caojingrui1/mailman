@@ -541,13 +541,14 @@ class ListAnonymousSubscribeView(MailingListView):
                 self.mailing_list.subscribe(
                     email, display_name,
                     pre_verified=False, pre_confirmed=False)
-                messages.success(request, _('Please check your inbox for '
-                                            'further instructions'))
+                messages.success(request,
+                                 _('Please check your inbox for further instructions, Or you have already subscribed successfully'))
             else:
                 messages.error(request,
                                _('Something went wrong. Please try again.'))
         except HTTPError as e:
-            messages.error(request, e.msg)
+            messages.success(request,
+                             _('Please check your inbox for further instructions, Or you have already subscribed successfully'))
         return redirect('list_summary', self.mailing_list.list_id)
 
 
