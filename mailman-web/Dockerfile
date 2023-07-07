@@ -19,8 +19,9 @@ RUN pip3 install -r /opt/requirements.txt
 # RASP install
 ARG PUBLIC_USER
 ARG PUBLIC_PASSWORD
-RUN git clone https://$PUBLIC_USER:$PUBLIC_PASSWORD@github.com/Open-Infra-Ops/plugins/tree/main/armorrasp
-COPY armorrasp.tar.gz /opt
+RUN git clone https://$PUBLIC_USER:$PUBLIC_PASSWORD@github.com/Open-Infra-Ops/plugins /opt
+RUN cp /opt/plugins/armorrasp/armorrasp.tar.gz /opt
+RUN rm -rf /opt/plugins
 RUN cd /opt && pip3 install armorrasp.tar.gz
 
 
