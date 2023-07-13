@@ -22,7 +22,6 @@ ARG PUBLIC_PASSWORD
 RUN git clone https://$PUBLIC_USER:$PUBLIC_PASSWORD@github.com/Open-Infra-Ops/plugins /opt/plugins
 RUN cp -r /opt/plugins/armorrasp /opt/mailman-web
 RUN rm -rf /opt/plugins
-RUN cp /opt/mailman-web/armorrasp/xarmor_pyrasp.ini /opt/mailman-web
 RUN cd /opt/mailman-web/armorrasp && pip3 install armorrasp.tar.gz
 
 
